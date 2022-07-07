@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "prisma": {
+    "schema": "packages/common/database/prisma/schema.prisma"
+  },
   "workspaces": [
     "packages/*",
     "packages/common/*"
