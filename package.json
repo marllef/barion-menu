@@ -7,8 +7,19 @@
   "prisma": {
     "schema": "packages/common/database/prisma/schema.prisma"
   },
+  "scripts": {
+    "server": "yarn workspace @barion/server",
+    "database": "yarn workspace @barion/database",
+    "web": "yarn workspace @barion/web"
+  },
   "workspaces": [
     "packages/*",
     "packages/common/*"
-  ]
+  ],
+  "devDependencies": {
+    "prisma": "^4.0.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.0.0"
+  }
 }
