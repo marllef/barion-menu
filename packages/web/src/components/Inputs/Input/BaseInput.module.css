@@ -1,0 +1,21 @@
+.container {
+  @apply flex flex-col transition-all;
+}
+
+.error {
+  @apply text-red-600 !border-red-600 focus:!border-sky-500 !visible;
+}
+
+.label {
+  @apply px-3 py-1 text-sm uppercase text-slate-700 font-light;
+}
+
+.input {
+  @apply rounded-full px-3 py-2 text-slate-700 transition-colors;
+  @apply border border-slate-200 outline-none focus:ring-sky-400 focus:border-transparent;
+  @apply placeholder:text-sm focus:ring-2 ring-offset-0;
+}
+
+.message {
+  @apply px-3 text-xs invisible text-start p-1 italic text-red-500;
+}

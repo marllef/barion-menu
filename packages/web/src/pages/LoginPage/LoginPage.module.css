@@ -1,0 +1,18 @@
+.container {
+  @apply flex h-screen bg-sky-300 min-w-[20rem] justify-center items-end;
+  @apply sm:items-center;
+}
+
+.midCard {
+  @apply flex flex-col w-full h-3/4 justify-center items-center p-10 bg-white rounded-t-xl;
+  @apply sm:w-fit sm:h-fit sm:rounded-xl;
+}
+
+.form {
+  @apply flex w-full sm:w-[20rem] flex-col items-start justify-start h-full px-5 transition-all;
+}
+
+.formTitle {
+  @apply w-full text-center text-3xl font-bold pb-10 uppercase text-sky-500;
+  @apply sm:pb-7
+}
