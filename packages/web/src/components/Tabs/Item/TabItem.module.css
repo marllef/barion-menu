@@ -1,0 +1,7 @@
+.trigger {
+  @apply flex flex-1 justify-center items-center min-w-[10rem] bg-white border-b-2 px-2 py-3 uppercase;
+}
+
+.trigger[data-state="active"] {
+  @apply border-b-2 border-sky-500;
+}

@@ -14,12 +14,12 @@ import styles from "./LoginPage.module.css";
 
 export const LoginPage = () => {
   const formRef = useRef<FormHandles>(null);
-  const { auth, token } = useAuth();
+  const { auth, user } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (token) navigate("/");
-  }, [token]);
+    if (user) navigate("/");
+  }, [user]);
 
   async function handleSubmit(data: LoginCredentials) {
     try {

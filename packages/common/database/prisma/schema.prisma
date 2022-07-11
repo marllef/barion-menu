@@ -11,14 +11,87 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(uuid())
+  id       String @id @default(uuid())
   name     String
-  email    String  @unique
+  email    String @unique
   password String
-  roles    Roles[] @default([DEFAULT])
+
+  roles Roles[] @default([USER])
+  menu  Menu[]
+
+  infoContact InfoContact?
+
+  @@map("user")
+}
+
+model InfoContact {
+  id Int @id @default(autoincrement())
+
+  ddd String?
+  tel String?
+
+  address   Address? @relation(fields: [addressId], references: [id])
+  addressId String?
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  @@map("info_contact")
+}
+
+model Address {
+  id String @id @default(uuid())
+
+  address  String
+  city     String
+  state    String
+  district String
+  country  String
+  zip      String
+
+  InfoContact InfoContact[]
+
+  @@map("address")
+}
+
+model Menu {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  categories MenuCategory[]
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  @@map("menu")
+}
+
+model Food {
+  id    String @id @default(uuid())
+  name  String
+  desc  String
+  price String
+
+  menuCategory   MenuCategory? @relation(fields: [menuCategoryId], references: [id])
+  menuCategoryId String?
+
+  @@map("food")
+}
+
+model MenuCategory {
+  id   String @id @default(uuid())
+  name String
+
+  foods Food[]
+
+  menu   Menu? @relation(fields: [menuId], references: [id])
+  menuId Int?
+
+
+  @@map("menu_category")
 }
 
 enum Roles {
   ADMIN
-  DEFAULT
+  USER
 }

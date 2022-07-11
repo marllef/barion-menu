@@ -1,8 +1,10 @@
 import { ReactNode, useEffect, useState } from "react";
 import { LoginCredentials } from "~/utils/schemas/loginSchema";
 import { showError, showSuccess } from "~/utils/toastfy/toasts";
-import { useApi } from "~/hooks/useApi";
+import { useAuthApi } from "~/hooks/useAuthApi";
 import { AuthContext } from "./AuthContext";
+import { User } from "@prisma/client";
+import axios from "axios";
 
 interface Props {
   children?: ReactNode;
@@ -10,10 +12,19 @@ interface Props {
 
 export const AuthProvider = ({ children }: Props) => {
   const [loading, setLoading] = useState(false);
-  const [token, setToken] = useState<string>("");
-  const api = useApi();
 
-  useEffect(() => {}, []);
+  const [user, setUser] = useState<User | null>(null);
+
+  const [token, setToken] = useState<string>("");
+  const api = useAuthApi();
+
+  useEffect(() => {
+    const mToken = sessionStorage.getItem("@auth:token");
+
+    if (mToken) {
+      api.getMe().then((res) => setUser(res));
+    }
+  }, []);
 
   async function signIn(credentials: LoginCredentials) {
     try {
@@ -21,14 +32,17 @@ export const AuthProvider = ({ children }: Props) => {
 
       const mToken = await api.signIn(credentials);
 
+      sessionStorage.setItem("@auth:token", mToken);
+
       setToken(mToken);
+
       showSuccess("Autenticado com sucesso!");
 
-      return mToken;
+      return true;
     } catch (err: any) {
       showError(err.message);
 
-      return null;
+      return false;
     } finally {
       setLoading(false);
     }
@@ -36,6 +50,9 @@ export const AuthProvider = ({ children }: Props) => {
 
   async function signOut() {
     await api.signOut();
+    sessionStorage.setItem("@auth:token", "");
+    setToken("");
+    setUser(null);
   }
 
   const auth = {
@@ -44,7 +61,7 @@ export const AuthProvider = ({ children }: Props) => {
   };
 
   return (
-    <AuthContext.Provider value={{ auth, token, loading }}>
+    <AuthContext.Provider value={{ auth, user, loading }}>
       {children}
     </AuthContext.Provider>
   );

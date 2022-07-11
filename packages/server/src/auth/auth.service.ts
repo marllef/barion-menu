@@ -36,4 +36,18 @@ export class AuthService {
       token: this.jwt.sign(payload),
     };
   }
+
+  async getMe(token: string) {
+    const decoded = this.jwt.decode(token, { json: true });
+
+    if (decoded && typeof decoded !== 'string') {
+      const user = await this.users.findById(decoded.sub);
+
+      user.password = undefined;
+
+      return user;
+    }
+
+    throw new Error('Token inválido!');
+  }
 }

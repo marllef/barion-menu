@@ -1,11 +1,12 @@
+import { User } from "@prisma/client";
 import { createContext } from "react";
 import { LoginCredentials } from "~/utils/schemas/loginSchema";
 
 type AuthState = {
-  token: string;
   loading: boolean;
+  user: User | null;
   auth: {
-    signIn: { (credentials: LoginCredentials): Promise<string | null> };
+    signIn: { (credentials: LoginCredentials): Promise<boolean> };
     signOut: { (): Promise<void> };
   };
 };
