@@ -67,10 +67,10 @@ model Menu {
 }
 
 model Food {
-  id    Int    @id @default(autoincrement())
+  id    Int     @id @default(autoincrement())
   name  String
-  desc  String
-  price String
+  desc  String?
+  price Decimal
 
   menuCategory   MenuCategory? @relation(fields: [menuCategoryId], references: [id])
   menuCategoryId Int?

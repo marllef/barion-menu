@@ -6,6 +6,8 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { MenuModule } from './menu/menu.module';
+import { CategoryModule } from './category/category.module';
+import { FoodModule } from './food/food.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { MenuModule } from './menu/menu.module';
       envFilePath: '.env',
     }),
     MenuModule,
+    CategoryModule,
+    FoodModule,
   ],
   controllers: [AppController, UsersController],
   providers: [AppService],
