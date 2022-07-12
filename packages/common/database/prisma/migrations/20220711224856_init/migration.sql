@@ -1,14 +1,5 @@
-/*
-  Warnings:
-
-  - You are about to drop the `User` table. If the table is not empty, all the data it contains will be lost.
-
-*/
--- AlterEnum
-ALTER TYPE "Roles" ADD VALUE 'USER';
-
--- DropTable
-DROP TABLE "User";
+-- CreateEnum
+CREATE TYPE "Roles" AS ENUM ('ADMIN', 'USER');
 
 -- CreateTable
 CREATE TABLE "user" (
