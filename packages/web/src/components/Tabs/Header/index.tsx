@@ -1,9 +1,11 @@
 import { List } from "@radix-ui/react-tabs";
-import { TabItemType } from "~/interfaces/Tabs";
-import { TabItem } from "../Item";
+import { TabItem } from "../Trigger";
 
 interface Props {
-  categories?: TabItemType[];
+  categories?: {
+    id: number;
+    name: string;
+  }[];
 }
 
 export const TabHeader = ({ categories: items }: Props) => {

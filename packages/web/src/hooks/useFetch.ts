@@ -5,7 +5,7 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_SERVER_API_BASE_URL,
 });
 
-export async function useFetch<T = unknown>(
+export function useFetch<T = unknown>(
   url: string,
   options?: AxiosRequestConfig
 ) {

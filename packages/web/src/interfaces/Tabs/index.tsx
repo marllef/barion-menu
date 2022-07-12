@@ -1,6 +1,3 @@
-export type TabItemType =
-  | string
-  | {
-      value: string;
-      id: string;
-    };
+import { MenuCategory } from "@prisma/client";
+
+export type TabItemType = string | MenuCategory;

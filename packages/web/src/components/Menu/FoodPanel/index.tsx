@@ -1,20 +1,22 @@
 import { Food } from "@prisma/client";
-import { ScrollList } from "~/components/List/ScrollList";
 import { TabContent } from "~/components/Tabs/Content";
 import { FoodItem } from "../FoodItem";
 
 interface Props {
   category: string;
-  foods?: any[];
+  foods?: Food[];
 }
 
 export const FoodPanel = ({ foods, category }: Props) => {
-  const render = (item: Food, index: number) => {
-    return <FoodItem key={index} data={item} />;
-  };
   return (
     <TabContent tab={category}>
-      <ScrollList source={foods} renderItem={render} />
+      <div className="flex flex-col w-full h-full overflow-hidden">
+        <ul className="flex flex-col w-full h-full px-2 overflow-y-auto">
+          {foods?.map((food: Food) => (
+            <FoodItem key={food.id} data={food} />
+          ))}
+        </ul>
+      </div>
     </TabContent>
   );
 };

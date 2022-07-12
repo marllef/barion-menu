@@ -1,52 +1,23 @@
+import { useEffect } from "react";
 import { Menu } from "~/components/Menu";
-
-const foods = [
-  {
-    category: "Lanche",
-    foods: [
-      {
-        name: "Hamburguer",
-        price: 1.5,
-        desc: "Hamburguer artesanal.",
-        avaible: true,
-        img: "",
-      },
-      {
-        name: "Omelete",
-        price: 0.5,
-        desc: "Omelete artesanal.",
-        avaible: true,
-        img: "",
-      },
-    ],
-  },
-  {
-    category: "Bebidas",
-    foods: [
-      {
-        name: "Coca-Cola",
-        price: 5,
-        desc: "Coca-Cola Gelada.",
-        avaible: true,
-        img: "",
-      },
-      {
-        name: "Sprite",
-        price: 4,
-        desc: "Sprite sabor limão.",
-        avaible: true,
-        img: "",
-      },
-    ],
-  },
-];
+import { useFetch } from "~/hooks/useFetch";
+import { APICategory } from "~/interfaces/api/APIMenuCategory";
 
 export const HomePage = () => {
-  const items = foods;
-  return (
-    <div className="w-full h-full">
-      <div className="flex bg-sky-300 h-28">Square</div>
-      <Menu data={items} />
-    </div>
-  );
+  const { data } = useFetch<APICategory[]>("/category/?menuId=1");
+
+  if (data) {
+    return (
+      <div className="w-full h-full">
+        <div className="flex bg-sky-300 h-28 justify-center items-center text-2xl font-semibold">
+          {data[0].menu?.name}
+        </div>
+        <div className="mx-auto xl:max-w-3xl h-full">
+          <Menu data={data!} />
+        </div>
+      </div>
+    );
+  }
+
+  return <div>Carregando...</div>;
 };

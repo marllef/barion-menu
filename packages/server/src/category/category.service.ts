@@ -24,7 +24,7 @@ export class CategoryService {
         menuId,
       },
       orderBy: {
-        name: 'asc',
+        name: 'desc',
       },
       include: {
         foods: true,

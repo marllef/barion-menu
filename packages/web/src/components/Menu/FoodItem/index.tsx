@@ -14,7 +14,7 @@ export const FoodItem = ({ data }: Props) => {
         <div className={styles.name}>{data.name}</div>
         <div className={styles.desc}>{data.desc}</div>
         <div className={styles.price}>
-          {currency(data.price).format({
+          {currency(Number(data.price)).format({
             decimal: ",",
             separator: ".",
             symbol: "R$",
