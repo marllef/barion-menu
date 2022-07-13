@@ -11,7 +11,6 @@ export const Private = ({ children }: Props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(loading);
     if (!user && !loading) navigate("/login", { replace: true });
   }, [user, loading]);
 

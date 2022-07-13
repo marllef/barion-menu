@@ -11,11 +11,11 @@
 }
 
 .name {
-  @apply text-xl font-semibold;
+  @apply text-xl font-semibold text-slate-800;
 }
 
 .desc {
-  @apply line-clamp-1;
+  @apply line-clamp-1 text-slate-500;
 }
 
 .price {

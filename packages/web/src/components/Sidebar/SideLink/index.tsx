@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { ReactNode, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import styles from "./SideLink.module.css";
 
 interface Props {
@@ -8,8 +8,10 @@ interface Props {
 }
 
 export const SideLink = ({ to, children }: Props) => {
+  const { pathname } = useLocation();
+  const active = pathname === to;
   return (
-    <Link className={styles.link} to={to}>
+    <Link className={`${active && styles.active} ${styles.link} `} to={to}>
       {children}
     </Link>
   );

@@ -1,5 +1,9 @@
 .link {
-  @apply flex w-full p-2 justify-start items-center border-l-4 text-xs uppercase mb-px last:mb-0;
-  @apply border-sky-500 bg-slate-50;
+  @apply flex w-full p-2 justify-start items-center border-slate-400  border-l-4 text-xs uppercase mb-px last:mb-0;
+  @apply active:border-sky-500 bg-slate-50 text-slate-700;
   @apply hover:bg-slate-100;
+}
+
+.active {
+  @apply border-sky-500;
 }
