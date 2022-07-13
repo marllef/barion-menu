@@ -18,15 +18,16 @@ export const LoginPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user) navigate("/");
+    if (user) navigate("/admin");
   }, [user]);
 
   async function handleSubmit(data: LoginCredentials) {
     try {
       const validated = await loginSchema.validate(data, { abortEarly: false });
-      const token = await auth?.signIn(validated);
-      if (token) {
-        navigate("/");
+      const authenticated = await auth?.signIn(validated);
+
+      if (authenticated) {
+        navigate("/admin");
       }
     } catch (err: any) {
       if (err instanceof ValidationError) {

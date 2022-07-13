@@ -11,30 +11,29 @@ interface Props {
 }
 
 export const AuthProvider = ({ children }: Props) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const [user, setUser] = useState<User | null>(null);
 
-  const [token, setToken] = useState<string>("");
-  const api = useAuthApi();
+  const authApi = useAuthApi();
 
   useEffect(() => {
-    const mToken = sessionStorage.getItem("@auth:token");
-
-    if (mToken) {
-      api.getMe().then((res) => setUser(res));
-    }
+    authApi
+      .getMe()
+      .then((res) => setUser(res))
+      .catch((err) => console.log(err.message))
+      .finally(() => setLoading(false));
   }, []);
 
   async function signIn(credentials: LoginCredentials) {
     try {
-      setLoading(true);
-
-      const mToken = await api.signIn(credentials);
+      const mToken = await authApi.signIn(credentials);
 
       sessionStorage.setItem("@auth:token", mToken);
 
-      setToken(mToken);
+      const mUser = await authApi.getMe();
+
+      setUser(mUser);
 
       showSuccess("Autenticado com sucesso!");
 
@@ -49,10 +48,15 @@ export const AuthProvider = ({ children }: Props) => {
   }
 
   async function signOut() {
-    await api.signOut();
-    sessionStorage.setItem("@auth:token", "");
-    setToken("");
-    setUser(null);
+    try {
+      await authApi.signOut();
+      sessionStorage.setItem("@auth:token", "");
+      setUser(null);
+    } catch (err: any) {
+      console.log(err.message);
+    } finally {
+      setLoading(false);
+    }
   }
 
   const auth = {
