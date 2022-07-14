@@ -8,6 +8,8 @@ CREATE TABLE "user" (
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "roles" "Roles"[] DEFAULT ARRAY['USER']::"Roles"[],
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
@@ -17,15 +19,17 @@ CREATE TABLE "info_contact" (
     "id" SERIAL NOT NULL,
     "ddd" TEXT,
     "tel" TEXT,
-    "addressId" TEXT,
+    "addressId" INTEGER,
     "userId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "info_contact_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "address" (
-    "id" TEXT NOT NULL,
+    "id" SERIAL NOT NULL,
     "address" TEXT NOT NULL,
     "city" TEXT NOT NULL,
     "state" TEXT NOT NULL,
@@ -41,28 +45,37 @@ CREATE TABLE "menu" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "menu_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "food" (
-    "id" TEXT NOT NULL,
+CREATE TABLE "menu_category" (
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
-    "desc" TEXT NOT NULL,
-    "price" TEXT NOT NULL,
-    "menuCategoryId" TEXT,
+    "menuId" INTEGER,
+    "active" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "food_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "menu_category_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "menu_category" (
-    "id" TEXT NOT NULL,
+CREATE TABLE "product" (
+    "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
-    "menuId" INTEGER,
+    "desc" TEXT,
+    "price" DECIMAL(65,30) NOT NULL,
+    "tags" TEXT[],
+    "active" BOOLEAN NOT NULL DEFAULT false,
+    "categoryId" INTEGER,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "menu_category_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "product_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -81,7 +94,7 @@ ALTER TABLE "info_contact" ADD CONSTRAINT "info_contact_addressId_fkey" FOREIGN 
 ALTER TABLE "menu" ADD CONSTRAINT "menu_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "food" ADD CONSTRAINT "food_menuCategoryId_fkey" FOREIGN KEY ("menuCategoryId") REFERENCES "menu_category"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "menu_category" ADD CONSTRAINT "menu_category_menuId_fkey" FOREIGN KEY ("menuId") REFERENCES "menu"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "menu_category" ADD CONSTRAINT "menu_category_menuId_fkey" FOREIGN KEY ("menuId") REFERENCES "menu"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "product" ADD CONSTRAINT "product_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "menu_category"("id") ON DELETE SET NULL ON UPDATE CASCADE;

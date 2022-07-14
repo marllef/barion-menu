@@ -1,28 +1,19 @@
-import { Food } from "@prisma/client";
+import { Food, MenuCategory } from "@prisma/client";
 import { Button } from "~/components/Buttons/Button";
 import { Card } from "~/components/Card";
 import { AdminLayout } from "~/components/Layout/Admin";
 import { ListView } from "~/components/ListView";
 
 interface ListItemProps {
-  item: Food;
+  item?: MenuCategory;
 }
 
-const ListItem = () => {
+const ListItem = ({ item }: ListItemProps) => {
   return (
-    <tr className="w-full">
-      <td>
-        <span className="">Nome 1</span>
-      </td>
-      <td>
-        <span className=" w-20">Dado 2</span>
-      </td>
-      <td>
-        <span className=" w-20">Dado 3</span>
-      </td>
-      <td>
-        <span className=" w-20">Dado 4</span>
-      </td>
+    <tr className="w-full even:bg-slate-50">
+      <td className="p-1">{}</td>
+      <td>Dado 2</td>
+      <td>Dado 3</td>
     </tr>
   );
 };
@@ -32,19 +23,16 @@ export const AdminMenu = () => {
     <AdminLayout>
       <Card className="p-2 h-full">
         <div className="flex flex-col w-full h-full overflow-hidden">
-          <div className="flex w-full justify-end border-b py-1 pb-3 mb-2">
+          <div className="flex w-full justify-end  py-1 pb-3">
             <Button className="uppercase">Nova Categoria</Button>
           </div>
 
           <ListView
-            source={Array.from(Array(101).keys())}
+            source={Array.from(Array(30).keys())}
             render={(item, index) => <ListItem />}
           >
-            <tr className="w-full">
-              <th>
-                <span className="w-[50%]">Nome</span>
-              </th>
-              <th>Idade</th>
+            <tr className="w-full sticky bg-white top-0 left-0 shadow">
+              <th className="p-1">Idade</th>
               <th>Status</th>
               <th>Criado em</th>
             </tr>

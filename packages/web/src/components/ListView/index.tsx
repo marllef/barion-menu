@@ -2,17 +2,13 @@ import { ElementType, ReactNode } from "react";
 
 interface Props {
   source: any[];
+  className?: string;
   as?: ElementType;
   children?: ReactNode;
   render?: (value: any, index: number, array: any[]) => JSX.Element;
 }
 
-export const ListView = ({
-  source,
-  render,
-  as: Element = "table",
-  children,
-}: Props) => {
+export const ListView = ({ source, render, className, children }: Props) => {
   function renderItem(value: any, index: number, array: any[]) {
     if (typeof render !== "undefined") return render(value, index, array);
 
@@ -20,12 +16,14 @@ export const ListView = ({
   }
 
   return (
-    <Element className="w-full h-full overflow-auto">
-      <div className="w-full h-full p-1 overflow-auto">
-        {children}
+    <div className="table relative bg-white w-full h-full overflow-auto">
+      <ul className="relative w-full h-full overflow-auto">
+        <table className="w-full h-full bg-white">
+          {children}
 
-        {source.map(renderItem)}
-      </div>
-    </Element>
+          {source.map(renderItem)}
+        </table>
+      </ul>
+    </div>
   );
 };
