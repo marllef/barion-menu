@@ -33,14 +33,22 @@ export const ProductPage = () => {
           {BRL(data?.price)}
         </div>
       </div>
-      <div className="flex flex-col items-start justify-center bg-slate-100 w-full py-3 px-4">
-        <div className="text-slate-700 text-lg capitalize">Escolha seu Pão</div>
-        <div className="text-slate-500 text-sm">Escolha até 1 opção.</div>
-      </div>
+      {true && (
+        <div className="flex flex-col items-start justify-center bg-slate-100 w-full py-3 px-4">
+          <div className="text-slate-700 text-lg capitalize">
+            Escolha seu Pão
+          </div>
+          <div className="text-slate-500 text-sm">Escolha até 1 opção.</div>
+        </div>
+      )}
+
       <div className="fixed w-full bottom-0 border-t left-0 p-2">
-        <Form className="flex w-full justify-between space-x-2" onSubmit={() => {}}>
+        <Form
+          className="flex w-full justify-between space-x-2"
+          onSubmit={() => {}}
+        >
           <NumberInput name="qtd" />
-          <Button>Adicionar</Button>
+          <Button className="w-full">Adicionar</Button>
         </Form>
       </div>
     </div>

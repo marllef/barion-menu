@@ -12,7 +12,7 @@ export const AdminLayout = ({ children }: Props) => {
       <Header />
       <div className="flex w-full h-full">
         <Sidebar />
-        <main className="bg-slate-100 w-full h-full border-t border-l">
+        <main className="flex bg-slate-100 w-full h-full border-t border-l p-2 overflow-hidden">
           {children}
         </main>
       </div>

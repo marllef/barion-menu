@@ -1,0 +1,4 @@
+.btn {
+  @apply bg-sky-500 rounded text-slate-50 text-sm font-semibold py-1 px-3;
+  @apply hover:bg-sky-600 active:bg-sky-700;
+}

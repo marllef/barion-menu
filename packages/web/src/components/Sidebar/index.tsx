@@ -6,7 +6,7 @@ export const Sidebar = () => {
     <aside className="w-40 bg-white h-full">
       <SideSection title="Loja">
         <SideLink to="/admin">Dashboard</SideLink>
-        <SideLink to="/">Menu</SideLink>
+        <SideLink to="/admin/menu">Menu</SideLink>
         <SideLink to="/">Produtos</SideLink>
       </SideSection>
       <SideSection title="Usuários">
