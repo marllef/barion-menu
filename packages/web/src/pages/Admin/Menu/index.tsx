@@ -1,17 +1,17 @@
-import { Food, MenuCategory } from "@prisma/client";
+import { Category, Prisma } from "@prisma/client";
 import { Button } from "~/components/Buttons/Button";
 import { Card } from "~/components/Card";
 import { AdminLayout } from "~/components/Layout/Admin";
 import { ListView } from "~/components/ListView";
 
 interface ListItemProps {
-  item?: MenuCategory;
+  item?: Category;
 }
 
 const ListItem = ({ item }: ListItemProps) => {
   return (
     <tr className="w-full even:bg-slate-50">
-      <td className="p-1">{}</td>
+      <td className="p-1">'a'</td>
       <td>Dado 2</td>
       <td>Dado 3</td>
     </tr>

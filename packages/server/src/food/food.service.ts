@@ -6,21 +6,21 @@ import { PrismaService } from '~/services/prisma.service';
 export class FoodService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(data: Prisma.FoodCreateInput) {
-    const food = await this.prisma.food.create({
+  async create(data: Prisma.ProductCreateInput) {
+    const food = await this.prisma.product.create({
       data,
     });
-    
+
     return food;
   }
 
   async findAll() {
-    const foods = await this.prisma.food.findMany({});
+    const foods = await this.prisma.product.findMany({});
     return foods;
   }
 
   async findOne(id: number) {
-    const food = await this.prisma.food.findFirst({
+    const food = await this.prisma.product.findFirst({
       where: {
         id,
       },
@@ -31,8 +31,8 @@ export class FoodService {
     return food;
   }
 
-  async update(id: number, data: Prisma.FoodUpdateInput) {
-    const updated = await this.prisma.food.update({
+  async update(id: number, data: Prisma.ProductUpdateInput) {
+    const updated = await this.prisma.product.update({
       data,
       where: {
         id,
@@ -43,7 +43,7 @@ export class FoodService {
   }
 
   async remove(id: number) {
-    const deleted = await this.prisma.food.delete({
+    const deleted = await this.prisma.product.delete({
       where: {
         id,
       },

@@ -19,20 +19,6 @@ export class MenuService {
     return menu;
   }
 
-  async createCategory(data: Prisma.MenuCategoryCreateInput) {
-    const category = await this.prisma.menuCategory.create({
-      data: data,
-      include: {
-        menu: true,
-        foods: true,
-      },
-    });
-
-    if (!category) throw new Error('Falha ao criar categoria.');
-
-    return category;
-  }
-
   async findAll() {
     const menus = await this.prisma.menu.findMany({});
     return menus;

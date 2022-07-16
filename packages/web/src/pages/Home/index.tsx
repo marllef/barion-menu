@@ -10,10 +10,10 @@ export const HomePage = () => {
     return (
       <div className="w-full h-full">
         <div className="flex bg-sky-300 h-28 justify-center items-center text-2xl font-semibold">
-          {data[0].menu?.name}
+          {}
         </div>
         <div className="mx-auto xl:max-w-3xl h-full">
-          <Menu data={data!} />
+          {<Menu data={data} />}
         </div>
       </div>
     );

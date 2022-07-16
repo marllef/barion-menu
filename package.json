@@ -9,7 +9,8 @@
   },
   "scripts": {
     "server": "yarn workspace @barion/server",
-    "web": "yarn workspace @barion/web"
+    "web": "yarn workspace @barion/web",
+    "start": "yarn web dev & yarn server dev"
   },
   "workspaces": [
     "packages/*",

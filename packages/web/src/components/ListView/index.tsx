@@ -1,4 +1,5 @@
 import { ElementType, ReactNode } from "react";
+import { HeaderRow } from "../Table/HeaderRow";
 
 interface Props {
   source: any[];
@@ -19,7 +20,7 @@ export const ListView = ({ source, render, className, children }: Props) => {
     <div className="table relative bg-white w-full h-full overflow-auto">
       <ul className="relative w-full h-full overflow-auto">
         <table className="w-full h-full bg-white">
-          {children}
+          <HeaderRow>{children}</HeaderRow>
 
           {source.map(renderItem)}
         </table>

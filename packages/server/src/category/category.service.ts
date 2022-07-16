@@ -6,20 +6,20 @@ import { PrismaService } from '~/services/prisma.service';
 export class CategoryService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(data: Prisma.MenuCategoryCreateInput) {
-    const category = await this.prisma.menuCategory.create({
+  async create(data: Prisma.CategoryCreateInput) {
+    const category = await this.prisma.category.create({
       data: data,
     });
     return category;
   }
 
   async findAll() {
-    const categories = await this.prisma.menuCategory.findMany({});
+    const categories = await this.prisma.category.findMany({});
     return categories;
   }
 
   async findAllByMenu(menuId: number) {
-    const categories = await this.prisma.menuCategory.findMany({
+    const categories = await this.prisma.category.findMany({
       where: {
         menuId,
       },
@@ -36,7 +36,7 @@ export class CategoryService {
   }
 
   async findById(id: number) {
-    const category = await this.prisma.menuCategory.findFirst({
+    const category = await this.prisma.category.findFirst({
       where: {
         id,
       },
@@ -45,8 +45,8 @@ export class CategoryService {
     return category;
   }
 
-  async update(id: number, data: Prisma.MenuCategoryUpdateInput) {
-    const updated = await this.prisma.menuCategory.update({
+  async update(id: number, data: Prisma.CategoryUpdateInput) {
+    const updated = await this.prisma.category.update({
       data,
       where: {
         id,
@@ -56,7 +56,7 @@ export class CategoryService {
   }
 
   async remove(id: number) {
-    const deleted = await this.prisma.menuCategory.delete({
+    const deleted = await this.prisma.category.delete({
       where: {
         id,
       },

@@ -15,7 +15,7 @@ export class FoodController {
   constructor(private readonly foodService: FoodService) {}
 
   @Post()
-  create(@Body() data: Prisma.FoodCreateInput) {
+  create(@Body() data: Prisma.ProductCreateInput) {
     return this.foodService.create(data);
   }
 
@@ -30,7 +30,7 @@ export class FoodController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() data: Prisma.FoodUpdateInput) {
+  update(@Param('id') id: string, @Body() data: Prisma.ProductUpdateInput) {
     return this.foodService.update(+id, data);
   }
 

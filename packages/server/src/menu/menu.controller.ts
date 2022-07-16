@@ -19,11 +19,6 @@ export class MenuController {
     return this.menuService.create(data);
   }
 
-  @Post('/category')
-  createCategory(@Body() data: Prisma.MenuCategoryCreateInput) {
-    return this.menuService.createCategory(data);
-  }
-
   @Get()
   findAll() {
     return this.menuService.findAll();

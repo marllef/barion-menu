@@ -1,7 +1,7 @@
 import { Prisma } from "@prisma/client";
 
 export interface APICategory
-  extends Prisma.MenuCategoryGetPayload<{
+  extends Prisma.CategoryGetPayload<{
     include: {
       foods: true;
       menu: true;

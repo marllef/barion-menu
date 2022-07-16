@@ -16,7 +16,7 @@ export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
   @Post()
-  create(@Body() data: Prisma.MenuCategoryCreateInput) {
+  create(@Body() data: Prisma.CategoryCreateInput) {
     return this.categoryService.create(data);
   }
 
@@ -33,7 +33,7 @@ export class CategoryController {
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() data: Prisma.MenuCategoryUpdateInput,
+    @Body() data: Prisma.CategoryUpdateInput,
   ) {
     return this.categoryService.update(+id, data);
   }

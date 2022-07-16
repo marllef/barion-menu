@@ -1,5 +1,6 @@
 import { Route, Routes as Router } from "react-router-dom";
 import { AdminPage } from "~/pages/Admin";
+import { Estoque } from "~/pages/Admin/Estoque";
 import { AdminMenu } from "~/pages/Admin/Menu";
 import { HomePage } from "~/pages/Home";
 import { LoginPage } from "~/pages/Login";
@@ -28,6 +29,7 @@ export const Routes = () => {
         }
       ></Route>
       <Route path="/admin/menu" element={<AdminMenu />} />
+      <Route path="/admin/estoque" element={<Estoque />} />
     </Router>
   );
 };

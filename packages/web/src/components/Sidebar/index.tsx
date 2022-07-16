@@ -4,10 +4,10 @@ import { SideSection } from "./SideSection";
 export const Sidebar = () => {
   return (
     <aside className="w-40 bg-white h-full">
-      <SideSection title="Loja">
+      <SideSection title="Gerenciar Loja">
         <SideLink to="/admin">Dashboard</SideLink>
         <SideLink to="/admin/menu">Menu</SideLink>
-        <SideLink to="/">Produtos</SideLink>
+        <SideLink to="/admin/estoque">Estoque</SideLink>
       </SideSection>
       <SideSection title="Usuários">
         <SideLink to="/">Gerenciar</SideLink>
