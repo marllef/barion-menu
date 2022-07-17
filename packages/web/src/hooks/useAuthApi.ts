@@ -1,5 +1,6 @@
 import { User } from "@prisma/client";
 import axios from "axios";
+import { UserAPI } from "~/interfaces/api/APIUser";
 import { LoginCredentials } from "~/utils/schemas/loginSchema";
 
 export const api = axios.create({
@@ -32,7 +33,7 @@ export const useAuthApi = () => ({
     return token;
   },
   getMe: async () => {
-    const response = await api.get<User>("/me");
+    const response = await api.get<UserAPI>("/me");
     return response.data;
   },
   signOut: async () => {

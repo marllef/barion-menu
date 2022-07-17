@@ -40,6 +40,9 @@ export class CategoryService {
       where: {
         id,
       },
+      include: {
+        foods: true,
+      },
     });
 
     return category;

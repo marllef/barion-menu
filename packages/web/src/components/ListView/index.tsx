@@ -19,10 +19,11 @@ export const ListView = ({ source, render, className, children }: Props) => {
   return (
     <div className="table relative bg-white w-full h-full overflow-auto">
       <ul className="relative w-full h-full overflow-auto">
-        <table className="w-full h-full bg-white">
-          <HeaderRow>{children}</HeaderRow>
-
-          {source.map(renderItem)}
+        <table className="w-full bg-white">
+          <thead>
+            <HeaderRow>{children}</HeaderRow>
+          </thead>
+          <tbody>{source.map(renderItem)}</tbody>
         </table>
       </ul>
     </div>

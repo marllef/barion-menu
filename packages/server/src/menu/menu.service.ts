@@ -29,6 +29,13 @@ export class MenuService {
       where: {
         id,
       },
+      include: {
+        categories: {
+          include: {
+            foods: true,
+          },
+        },
+      },
     });
     if (!menu) throw new Error('Menu não encontrado.');
     return menu;

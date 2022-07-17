@@ -43,6 +43,10 @@ export class UsersService {
       where: {
         id,
       },
+      include: {
+        menu: true,
+        infoContact: true,
+      },
     });
 
     return user;

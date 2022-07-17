@@ -5,6 +5,9 @@ import { useAuthApi } from "~/hooks/useAuthApi";
 import { AuthContext } from "./AuthContext";
 import { User } from "@prisma/client";
 import axios from "axios";
+import { UserAPI } from "~/interfaces/api/APIUser";
+import { useFetch } from "~/hooks/useFetch";
+import { MenuWithCategories } from "~/interfaces/api/APIMenu";
 
 interface Props {
   children?: ReactNode;
@@ -13,7 +16,9 @@ interface Props {
 export const AuthProvider = ({ children }: Props) => {
   const [loading, setLoading] = useState<boolean>(true);
 
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserAPI | null>(null);
+
+  
 
   const authApi = useAuthApi();
 

@@ -7,7 +7,7 @@ interface Props extends HTMLAttributes<HTMLTableRowElement> {
 
 export const Row = ({ children, className = "", ...rest }: Props) => {
   return (
-    <tr className={`w-full even:bg-slate-50 ${className}`} {...rest}>
+    <tr className={`odd:bg-slate-50 ${className}`} {...rest}>
       {children}
     </tr>
   );

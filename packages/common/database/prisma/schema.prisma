@@ -92,16 +92,6 @@ model Category {
   @@map("menu_category")
 }
 
-model Estoque {
-  id       Int @id @default(autoincrement())
-  quantity Int @default(0)
-
-  updatedAt DateTime @default(now())
-  createdAt DateTime @default(now())
-
-  @@map("estoque")
-}
-
 model Product {
   id       Int     @id @default(autoincrement())
   name     String
