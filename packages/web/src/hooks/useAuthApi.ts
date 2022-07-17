@@ -1,11 +1,6 @@
-import { User } from "@prisma/client";
-import axios from "axios";
+import { api } from "~/configs/api";
 import { UserAPI } from "~/interfaces/api/APIUser";
 import { LoginCredentials } from "~/utils/schemas/loginSchema";
-
-export const api = axios.create({
-  baseURL: import.meta.env.VITE_AUTH_API_URL,
-});
 
 api.interceptors.request.use(
   async (config) => {
@@ -24,7 +19,10 @@ api.interceptors.request.use(
 
 export const useAuthApi = () => ({
   signIn: async (credentials: LoginCredentials) => {
-    const response = await api.post<{ token: string }>("/login", credentials);
+    const response = await api.post<{ token: string }>(
+      "/api/auth/login",
+      credentials
+    );
 
     const token = response.data.token;
 
@@ -33,7 +31,7 @@ export const useAuthApi = () => ({
     return token;
   },
   getMe: async () => {
-    const response = await api.get<UserAPI>("/me");
+    const response = await api.get<UserAPI>("/api/auth/me");
     return response.data;
   },
   signOut: async () => {

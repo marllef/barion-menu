@@ -1,19 +1,17 @@
 import { useField } from "@unform/core";
-import { ElementType, InputHTMLAttributes, useEffect, useRef } from "react";
+import { InputHTMLAttributes, useEffect, useRef } from "react";
 
-import styles from "./Input.module.css";
+import styles from "./BaseInput.module.css";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label?: string;
-  as?: ElementType;
 }
 
-export const Input = ({
+export const RoundedInput = ({
   name,
   className = "",
   label = "Label",
-  as: Element = "input",
   ...rest
 }: Props) => {
   const inputRef = useRef(null);
@@ -36,9 +34,9 @@ export const Input = ({
   }, [fieldName, registerField]);
 
   return (
-    <label className={`${styles.container} ${className}`}>
-      <span className={`${styles.label}`}>{label}</span>
-      <Element
+    <label className={`group ${styles.container} ${className}`}>
+      <span className={`${styles.label} peer-focus:bg-red-500`}>{label}</span>
+      <input
         className={`${styles.input} ${error && styles.error}`}
         ref={inputRef}
         onFocus={clearError}

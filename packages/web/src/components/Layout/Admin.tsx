@@ -1,4 +1,6 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "~/hooks/useAuth";
 import { Header } from "../Header";
 import { Sidebar } from "../Sidebar";
 
@@ -7,6 +9,13 @@ interface Props {
 }
 
 export const AdminLayout = ({ children }: Props) => {
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user && !loading) navigate("/login", { replace: true });
+  }, [user, loading]);
+
   return (
     <div className="flex flex-col w-full h-screen overflow-hidden">
       <Header />

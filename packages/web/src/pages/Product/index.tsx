@@ -1,4 +1,4 @@
-import { Food } from "@prisma/client";
+import { Product } from "@prisma/client";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFetch } from "~/hooks/useFetch";
 import { MdArrowBack as Arrow } from "react-icons/md";
@@ -10,7 +10,7 @@ import { Button } from "~/components/Buttons/Button";
 export const ProductPage = () => {
   const { id } = useParams();
   const naigate = useNavigate();
-  const { data } = useFetch<Food>(`/food/${id}`);
+  const { data } = useFetch<Product>(`/food/${id}`);
   return (
     <div className="relative w-full h-full">
       <div className="flex relative bg-sky-300 h-40 justify-center items-center text-2xl font-semibold select-none">

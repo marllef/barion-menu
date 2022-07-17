@@ -7,7 +7,6 @@ export const Sidebar = () => {
       <SideSection title="Gerenciar Loja">
         <SideLink to="/admin">Dashboard</SideLink>
         <SideLink to="/admin/menu">Menu</SideLink>
-        <SideLink to="/admin/estoque">Estoque</SideLink>
       </SideSection>
       <SideSection title="Usuários">
         <SideLink to="/">Gerenciar</SideLink>

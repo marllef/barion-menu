@@ -2,7 +2,6 @@ import { useContext, useRef, useState } from "react";
 import { Trigger } from "@radix-ui/react-tabs";
 import { TabItemType } from "~/interfaces/Tabs";
 import styles from "./TabItem.module.css";
-import { MenuCategory } from "@prisma/client";
 
 interface Props {
   item: any;

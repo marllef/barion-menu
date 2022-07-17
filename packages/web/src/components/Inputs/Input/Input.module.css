@@ -1,0 +1,22 @@
+.container {
+  @apply relative flex w-full flex-col transition-all;
+}
+
+.error {
+  @apply text-red-600 !border-red-600 focus:!border-sky-500 !visible;
+}
+
+.label {
+  @apply absolute -top-2 left-2 bg-white px-1 text-xs uppercase text-slate-700 font-light;
+  @apply select-none;
+}
+
+.input {
+  @apply rounded p-2 text-sm text-slate-700 transition-all;
+  @apply border border-slate-200 outline-none focus:ring-sky-400 focus:border-transparent;
+  @apply placeholder:text-sm focus:ring-2 ring-offset-0;
+}
+
+.message {
+  @apply px-2 text-xs invisible text-start p-1 italic text-red-500;
+}

@@ -20,16 +20,8 @@ export const Routes = () => {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/sair" element={<SignOut />} />
 
-      <Route
-        path="/admin"
-        element={
-          <Private>
-            <AdminPage />
-          </Private>
-        }
-      ></Route>
-      <Route path="/admin/menu" element={<AdminMenu />} />
-      <Route path="/admin/estoque" element={<Estoque />} />
+      <Route path="/admin" element={<AdminPage />}></Route>
+      <Route path="/admin/menu" element={<Estoque />} />
     </Router>
   );
 };

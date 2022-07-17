@@ -1,3 +1,3 @@
-import { MenuCategory } from "@prisma/client";
+import { Category } from "@prisma/client";
 
-export type TabItemType = string | MenuCategory;
+export type TabItemType = string | Category;

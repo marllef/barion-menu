@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { ValidationError } from "yup";
 import { RoundedButton } from "~/components/Buttons/Rounded";
-import { Input } from "~/components/Inputs/Input";
+import { RoundedInput } from "~/components/Inputs/RoundedInput";
 import { Link } from "~/components/Link";
 import { VStack } from "~/components/Stack/VStack";
 import { useAuth } from "~/hooks/useAuth";
@@ -49,14 +49,14 @@ export const LoginPage = () => {
         <Form ref={formRef} className={styles.form} onSubmit={handleSubmit}>
           <span className={styles.formTitle}>Bem-vindo</span>
           <VStack>
-            <Input
+            <RoundedInput
               className="w-full"
               name="email"
               type={"email"}
               placeholder="Digite o email..."
               label="Email"
             />
-            <Input
+            <RoundedInput
               className="w-full"
               name="password"
               type={"password"}

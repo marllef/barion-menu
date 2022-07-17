@@ -17,3 +17,4 @@ export const TabHeader = ({ categories: items }: Props) => {
     </List>
   );
 };
+

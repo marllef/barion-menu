@@ -5,5 +5,5 @@ interface Props extends HTMLAttributes<HTMLTableCellElement> {
 }
 
 export const DataItem = ({ className = '', ...rest }: Props) => {
-  return <td className={`${className} p-1 text-center`} {...rest} />;
+  return <td className={`${className} p-2 text-center text-sm`} {...rest} />;
 };

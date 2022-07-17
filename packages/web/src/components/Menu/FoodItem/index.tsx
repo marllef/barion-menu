@@ -1,10 +1,10 @@
-import { Food } from "@prisma/client";
+import { Product } from "@prisma/client";
 import currency from "currency.js";
 import { Link } from "react-router-dom";
 import styles from "./FoodItem.module.css";
 
 interface Props {
-  data: Food;
+  data: Product;
 }
 
 export const FoodItem = ({ data }: Props) => {
