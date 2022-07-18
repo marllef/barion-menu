@@ -1,3 +1,4 @@
+import { CategoryWithFood } from "~/interfaces/api/APICategory";
 import { APICategory } from "~/interfaces/api/APIMenuCategory";
 import { Tabs } from "../Tabs";
 import { TabContent } from "../Tabs/Content";
@@ -5,7 +6,7 @@ import { TabHeader } from "../Tabs/Header";
 import { FoodPanel } from "./FoodPanel";
 
 interface Props {
-  data: APICategory[];
+  data: CategoryWithFood[];
 }
 
 export const Menu = ({ data: items }: Props) => {

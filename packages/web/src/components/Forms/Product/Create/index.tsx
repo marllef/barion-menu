@@ -6,7 +6,7 @@ import { Select } from "~/components/Inputs/Select";
 import { TabContent } from "~/components/Tabs/Content";
 import { List } from "@radix-ui/react-tabs";
 import { useRef, useState } from "react";
-import { FormHandles } from "@unform/core";
+import { FormHandles, FormHelpers } from "@unform/core";
 import { MenuWithCategories } from "~/interfaces/api/APIMenu";
 import { useFetch } from "~/hooks/useFetch";
 import { useAuth } from "~/hooks/useAuth";
@@ -14,6 +14,7 @@ import { ProductServices } from "~/services/ProductServices";
 import { showError, showSuccess } from "~/utils/toastfy/toasts";
 import { Tab } from "~/components/Tabs/Tab";
 import { useMenu } from "~/hooks/useMenu";
+import { CreateProductSchema } from "~/utils/schemas/Product/CreateSchema";
 
 interface Props {
   onClose?: { (): void };
@@ -25,23 +26,24 @@ export const CreateProduct = ({ onClose = () => {} }: Props) => {
   const [currentTab, setCurrentTab] = useState("product");
   const { menu } = useMenu();
 
-  async function handleSubmit(data: any) {
+  async function handleSubmit(data: any, { reset }: FormHelpers) {
     try {
+      const validated = await CreateProductSchema.validate(data);
       await ProductServices.create({
-        name: data.name,
-        price: Number(data.price),
+        name: validated.name,
+        price: validated.price,
         active: true,
         category: {
           connect: {
-            id: Number(data.category),
+            id: validated.category,
           },
         },
-        desc: data.desc,
-        quantity: Number(data.quantity),
+        desc: validated.desc,
+        quantity: validated.quantity,
       });
 
       showSuccess("Produto criado com sucesso!");
-
+      reset();
       onClose();
     } catch (err: any) {
       showError(err.message);
@@ -83,13 +85,14 @@ export const CreateProduct = ({ onClose = () => {} }: Props) => {
             />
           </div>
 
-          <div className="flex space-x-2">
+          <div className="flex space-x-2 pb-2">
             <Input name="price" label="Preço" type={"number"} step={0.01} />
             <Input name="quantity" type={"number"} step={1} label="Estoque" />
           </div>
 
           <Input name="desc" label="Descrição" as={"textarea"} />
-          <div className="flex w-full justify-end space-x-2">
+
+          <div className="flex w-full justify-end space-x-2 pt-2">
             <Button
               className="!bg-slate-100 hover:!bg-slate-200 !text-slate-600"
               onClick={handleCancel}

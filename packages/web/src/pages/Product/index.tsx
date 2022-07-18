@@ -6,16 +6,27 @@ import { BRL } from "~/utils/currency";
 import { NumberInput } from "~/components/Inputs/Number";
 import { Form } from "@unform/web";
 import { Button } from "~/components/Buttons/Button";
+import { useMenu } from "~/hooks/useMenu";
+import { useEffect, useState } from "react";
 
 export const ProductPage = () => {
+  const { menu } = useMenu();
+  const [data, setData] = useState<Product>();
   const { id } = useParams();
-  const naigate = useNavigate();
-  const { data } = useFetch<Product>(`/food/${id}`);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const products = menu?.categories.flatMap((item) => item.foods);
+    const product = products?.find((item) => item.id === Number(id));
+
+    if (product) setData(product);
+  }, [menu, setData]);
+
   return (
     <div className="relative w-full h-full">
       <div className="flex relative bg-sky-300 h-40 justify-center items-center text-2xl font-semibold select-none">
         <div
-          onClick={() => naigate("/")}
+          onClick={() => navigate("/")}
           className="flex w-10 h-10 rounded-full text-sky-400 hover:text-sky-600 bg-white p-2 justify-center items-center absolute top-3 left-3 cursor-pointer"
         >
           <Arrow />
@@ -33,7 +44,7 @@ export const ProductPage = () => {
           {BRL(data?.price)}
         </div>
       </div>
-      {true && (
+      {false && (
         <div className="flex flex-col items-start justify-center bg-slate-100 w-full py-3 px-4">
           <div className="text-slate-700 text-lg capitalize">
             Escolha seu Pão

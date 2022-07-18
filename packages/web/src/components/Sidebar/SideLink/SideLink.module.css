@@ -1,9 +1,10 @@
 .link {
-  @apply flex w-full p-2 justify-start items-center border-slate-400  border-l-4 text-xs uppercase mb-px last:mb-0;
-  @apply active:border-sky-500 bg-slate-50 text-slate-700;
-  @apply hover:bg-slate-100;
+  @apply flex w-full p-2 justify-start items-center rounded-lg text-sm last:mb-0;
+  @apply text-slate-700;
+  @apply hover:bg-slate-200 transition-all;
+  @apply space-x-4;
 }
 
 .active {
-  @apply border-sky-500;
+  @apply bg-slate-100 font-bold;
 }

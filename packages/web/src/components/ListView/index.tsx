@@ -19,7 +19,7 @@ export const ListView = ({ source, render, className, children }: Props) => {
   return (
     <div className="table relative bg-white w-full h-full overflow-auto">
       <ul className="relative w-full h-full overflow-auto">
-        <table className="w-full bg-white">
+        <table className="w-full bg-white text-slate-700">
           <thead>
             <HeaderRow>{children}</HeaderRow>
           </thead>

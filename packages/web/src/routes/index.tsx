@@ -1,6 +1,7 @@
 import { Route, Routes as Router } from "react-router-dom";
 import { AdminPage } from "~/pages/Admin";
-import { Estoque } from "~/pages/Admin/Estoque";
+import { AdminCategorias } from "~/pages/Admin/Categorias";
+import { AdminProdutos } from "~/pages/Admin/Produtos";
 import { HomePage } from "~/pages/Home";
 import { LoginPage } from "~/pages/Login";
 import { ProductPage } from "~/pages/Product";
@@ -19,7 +20,8 @@ export const Routes = () => {
       <Route path="/sair" element={<SignOut />} />
 
       <Route path="/admin" element={<AdminPage />}></Route>
-      <Route path="/admin/menu" element={<Estoque />} />
+      <Route path="/admin/menu" element={<AdminProdutos />} />
+      <Route path="/admin/categoria" element={<AdminCategorias />} />
     </Router>
   );
 };

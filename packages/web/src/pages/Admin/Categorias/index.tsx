@@ -1,75 +1,53 @@
-import { Product } from "@prisma/client";
+import { Category, Product } from "@prisma/client";
 import { Form } from "@unform/web";
 import { useEffect, useMemo, useState } from "react";
 import { Card } from "~/components/Card";
+import { Input } from "~/components/Inputs/Input";
 import { Select } from "~/components/Inputs/Select";
 import { AdminLayout } from "~/components/Layout/Admin";
 import { ListView } from "~/components/ListView";
-import { AddProductModal as AddProduct } from "~/components/Modals/AddProduct";
+import { AddProductModal as AddProduct } from "~/components/Modals/Product/Create";
 import { Columm } from "~/components/Table/Column";
 import { DataItem } from "~/components/Table/DataItem";
 import { Row } from "~/components/Table/Row";
 import { useAuth } from "~/hooks/useAuth";
 import { useFetch } from "~/hooks/useFetch";
 import { useMenu } from "~/hooks/useMenu";
+import { CategoryWithFood } from "~/interfaces/api/APICategory";
 import { MenuWithCategories } from "~/interfaces/api/APIMenu";
 import { BRL } from "~/utils/currency";
 
 interface ListItemProps {
-  item: Product;
+  item: CategoryWithFood;
 }
 
 const ListItem = ({ item }: ListItemProps) => {
-  function getStatus(value: number) {
-    if (value >= 5) {
-      return "Disponível";
-    }
-
-    if (value < 5) {
-      return "Estoque Crítico";
-    }
-
-    return "Indisponível";
-  }
   return (
     <Row>
       <DataItem>{item.id}</DataItem>
       <DataItem>{item.name}</DataItem>
-      <DataItem>{item.desc}</DataItem>
-      <DataItem>{BRL(item.price || 0)}</DataItem>
-      <DataItem
-        className={`${
-          item.quantity >= 5 ? "text-emerald-600" : "text-red-600"
-        }`}
-      >
-        {getStatus(item.quantity)}
-      </DataItem>
+      <DataItem>{item.foods.length}</DataItem>
+      <DataItem>{new Date(item?.createdAt).toLocaleString()}</DataItem>
       <DataItem>{new Date(item?.updatedAt).toLocaleString()}</DataItem>
-      <DataItem>{}</DataItem>
+      <DataItem>Editar | Excluir</DataItem>
     </Row>
   );
 };
 
-export const Estoque = () => {
-  const [source, setSource] = useState<Product[]>();
-  const [selectedCategory, setSelectedCategory] = useState("");
+export const AdminCategorias = () => {
+  const [source, setSource] = useState<CategoryWithFood[]>([]);
+  const [search, setSearch] = useState("");
 
   const { menu } = useMenu();
 
   useEffect(() => {
     if (menu) {
-      if (selectedCategory) {
-        const dataSource = menu.categories.find(
-          (category) => category.id === Number(selectedCategory)
-        )?.foods;
-
-        setSource(dataSource);
-      } else {
-        const dataSource = menu.categories.flatMap((item) => [...item.foods]);
-        setSource(dataSource);
-      }
+      const categories = menu.categories.filter((item) =>
+        item.name.toUpperCase().includes(search)
+      );
+      setSource(categories);
     }
-  }, [menu, selectedCategory]);
+  }, [menu, search]);
 
   return (
     <AdminLayout>
@@ -77,17 +55,14 @@ export const Estoque = () => {
         <div className="flex flex-col w-full h-full overflow-hidden">
           <div className="flex w-full justify-between pt-1 px-3 pb-3">
             <div className="flex space-x-2">
-              <Form onSubmit={() => {}}>
-                <Select
-                  name="categories"
-                  options={(menu?.categories || []).map((category) => ({
-                    name: category.name,
-                    value: `${category.id}`,
-                  }))}
-                  onChange={(event) =>
-                    setSelectedCategory(event.currentTarget.value)
+              <Form className="w-40 h-9" onSubmit={() => {}}>
+                <Input
+                  name="find"
+                  label="Pesquisar"
+                  placeholder="Pesquise aqui..."
+                  onChange={(evt) =>
+                    setSearch(evt.currentTarget.value.toUpperCase())
                   }
-                  label="Categoria"
                 />
               </Form>
             </div>
@@ -100,10 +75,9 @@ export const Estoque = () => {
             render={(item, index) => <ListItem item={item} key={index} />}
           >
             <Columm>Id</Columm>
-            <Columm>Produto</Columm>
-            <Columm>Descrição</Columm>
-            <Columm>Preço</Columm>
-            <Columm>Estoque</Columm>
+            <Columm>Categoria</Columm>
+            <Columm>Produtos</Columm>
+            <Columm>Criado em</Columm>
             <Columm>Atualizado em</Columm>
             <Columm>Ações</Columm>
           </ListView>

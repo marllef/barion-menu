@@ -18,5 +18,5 @@
 }
 
 .message {
-  @apply px-2 text-xs invisible text-start p-1 italic text-red-500;
+  @apply px-2 text-xs invisible text-start italic text-red-500;
 }

@@ -2,10 +2,10 @@ import { Close, Title } from "@radix-ui/react-dialog";
 import { ReactNode, useEffect, useState } from "react";
 import { Button } from "~/components/Buttons/Button";
 import { Card } from "~/components/Card";
-import { Modal } from "../Modal";
+import { Modal } from "../../Modal";
 import { IoMdClose } from "react-icons/io";
 import styles from "./AddProduct.module.css";
-import { CreateProduct as Form } from "~/components/Forms/Product/Create";
+import { CreateProduct as CreateProductForm } from "~/components/Forms/Product/Create";
 
 interface Props {
   children?: ReactNode;
@@ -40,7 +40,7 @@ export const AddProductModal = ({ children }: Props) => {
             </div>
           </Close>
 
-          <Form onClose={handleClose} />
+          <CreateProductForm onClose={handleClose} />
         </Card>
       </Modal>
     </>

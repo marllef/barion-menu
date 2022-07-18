@@ -47,9 +47,11 @@ export const Input = ({
         defaultValue={defaultValue}
         {...rest}
       />
-      <span className={`${styles.message} ${error && styles.error}`}>
-        {error}
-      </span>
+      {error && (
+        <span className={`${styles.message} ${error && styles.error}`}>
+          {error}
+        </span>
+      )}
     </label>
   );
 };
