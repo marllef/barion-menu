@@ -1,8 +1,0 @@
-.tab {
-  @apply p-2 text-slate-500 uppercase outline-none;
-}
-
-.tab[data-state="active"] {
-  @apply border-b-2 text-slate-800 border-sky-500 rounded-t;
-}
-

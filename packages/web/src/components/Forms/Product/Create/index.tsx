@@ -4,40 +4,16 @@ import { Button } from "~/components/Buttons/Button";
 import { Input } from "~/components/Inputs/Input";
 import { Select } from "~/components/Inputs/Select";
 import { TabContent } from "~/components/Tabs/Content";
-import { List, Trigger } from "@radix-ui/react-tabs";
-import { ReactNode, useRef, useState } from "react";
-import styles from "./ProductCreate.module.css";
+import { List } from "@radix-ui/react-tabs";
+import { useRef, useState } from "react";
 import { FormHandles } from "@unform/core";
 import { MenuWithCategories } from "~/interfaces/api/APIMenu";
 import { useFetch } from "~/hooks/useFetch";
 import { useAuth } from "~/hooks/useAuth";
-
-interface TabProps {
-  value: string;
-  children?: ReactNode;
-  clasName?: string;
-  onClick?: { (value: string): void };
-  disabled?: boolean;
-}
-
-const Tab = ({
-  value,
-  children,
-  clasName = "",
-  disabled = false,
-  onClick = () => {},
-}: TabProps) => {
-  return (
-    <Trigger
-      className={`${clasName} ${styles.tab}`}
-      onClick={() => onClick(value)}
-      value={value}
-      disabled={disabled}
-    >
-      {children}
-    </Trigger>
-  );
-};
+import { ProductServices } from "~/services/ProductServices";
+import { showError, showSuccess } from "~/utils/toastfy/toasts";
+import { Tab } from "~/components/Tabs/Tab";
+import { useMenu } from "~/hooks/useMenu";
 
 interface Props {
   onClose?: { (): void };
@@ -47,15 +23,29 @@ interface Props {
 export const CreateProduct = ({ onClose = () => {} }: Props) => {
   const formRef = useRef<FormHandles>(null);
   const [currentTab, setCurrentTab] = useState("product");
-  const { user } = useAuth();
+  const { menu } = useMenu();
 
-  const { data: menu } = useFetch<MenuWithCategories>(
-    user?.menu.length ? `/menu/${user?.menu[0].id}` : null
-  );
+  async function handleSubmit(data: any) {
+    try {
+      await ProductServices.create({
+        name: data.name,
+        price: Number(data.price),
+        active: true,
+        category: {
+          connect: {
+            id: Number(data.category),
+          },
+        },
+        desc: data.desc,
+        quantity: Number(data.quantity),
+      });
 
-  function handleSubmit(data: any) {
-    console.log(data);
-    onClose();
+      showSuccess("Produto criado com sucesso!");
+
+      onClose();
+    } catch (err: any) {
+      showError(err.message);
+    }
   }
 
   function handleCancel() {

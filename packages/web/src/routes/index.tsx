@@ -1,12 +1,10 @@
 import { Route, Routes as Router } from "react-router-dom";
 import { AdminPage } from "~/pages/Admin";
 import { Estoque } from "~/pages/Admin/Estoque";
-import { AdminMenu } from "~/pages/Admin/Menu";
 import { HomePage } from "~/pages/Home";
 import { LoginPage } from "~/pages/Login";
 import { ProductPage } from "~/pages/Product";
 import { SignOut } from "~/pages/SignOut";
-import { Private } from "./ProtectedRoute";
 
 export const Routes = () => {
   return (

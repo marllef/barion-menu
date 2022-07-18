@@ -1,6 +1,6 @@
 import { Product } from "@prisma/client";
 import { Form } from "@unform/web";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Card } from "~/components/Card";
 import { Select } from "~/components/Inputs/Select";
 import { AdminLayout } from "~/components/Layout/Admin";
@@ -11,6 +11,7 @@ import { DataItem } from "~/components/Table/DataItem";
 import { Row } from "~/components/Table/Row";
 import { useAuth } from "~/hooks/useAuth";
 import { useFetch } from "~/hooks/useFetch";
+import { useMenu } from "~/hooks/useMenu";
 import { MenuWithCategories } from "~/interfaces/api/APIMenu";
 import { BRL } from "~/utils/currency";
 
@@ -50,14 +51,10 @@ const ListItem = ({ item }: ListItemProps) => {
 };
 
 export const Estoque = () => {
-  const { user } = useAuth();
   const [source, setSource] = useState<Product[]>();
-
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  const { data: menu } = useFetch<MenuWithCategories>(
-    user?.menu.length ? `/api/menu/${user?.menu[0].id}` : null
-  );
+  const { menu } = useMenu();
 
   useEffect(() => {
     if (menu) {
@@ -83,9 +80,9 @@ export const Estoque = () => {
               <Form onSubmit={() => {}}>
                 <Select
                   name="categories"
-                  options={(menu?.categories || []).map((item) => ({
-                    name: item.name,
-                    value: `${item.id}`,
+                  options={(menu?.categories || []).map((category) => ({
+                    name: category.name,
+                    value: `${category.id}`,
                   }))}
                   onChange={(event) =>
                     setSelectedCategory(event.currentTarget.value)

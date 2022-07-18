@@ -17,8 +17,10 @@ export const Input = ({
   ...rest
 }: Props) => {
   const inputRef = useRef(null);
+
   const { fieldName, defaultValue, registerField, error, clearError } =
     useField(name);
+
   useEffect(() => {
     registerField({
       name: fieldName,
