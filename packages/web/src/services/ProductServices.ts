@@ -8,8 +8,15 @@ export const ProductServices = {
     return response.data;
   },
 
-  async update(id: number, data: Prisma.CategoryUpdateInput) {
+  async update(id: number, data: Prisma.ProductUpdateInput) {
     const response = await api.post(`/api/food/${id}`, data);
+
+    return response.data;
+  },
+
+  async delete(id: number) {
+    const response = await api.delete(`/api/food/${id}`);
+    
     return response.data;
   },
 };

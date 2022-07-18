@@ -1,0 +1,3 @@
+.close {
+  @apply rounded-full absolute top-2 right-2 hover:bg-red-100 p-px cursor-pointer transition-colors;
+}

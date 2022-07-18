@@ -7,42 +7,30 @@ import { TabContent } from "~/components/Tabs/Content";
 import { List } from "@radix-ui/react-tabs";
 import { useRef, useState } from "react";
 import { FormHandles, FormHelpers } from "@unform/core";
-import { MenuWithCategories } from "~/interfaces/api/APIMenu";
-import { useFetch } from "~/hooks/useFetch";
-import { useAuth } from "~/hooks/useAuth";
-import { ProductServices } from "~/services/ProductServices";
 import { showError, showSuccess } from "~/utils/toastfy/toasts";
 import { Tab } from "~/components/Tabs/Tab";
 import { useMenu } from "~/hooks/useMenu";
-import { CreateProductSchema } from "~/utils/schemas/Product/CreateProductSchema";
+import { CategoryServices } from "~/services/CategoryServices";
+import { CreateCategorySchema } from "~/utils/schemas/Category/CreateCategorySchema";
+import { useAuth } from "~/hooks/useAuth";
 
 interface Props {
   onClose?: { (): void };
   onOpen?: { (): void };
 }
 
-export const CreateProduct = ({ onClose = () => {} }: Props) => {
+export const CreateCategoryForm = ({ onClose = () => {} }: Props) => {
   const formRef = useRef<FormHandles>(null);
-  const [currentTab, setCurrentTab] = useState("product");
-  const { menu } = useMenu();
+  const [currentTab, setCurrentTab] = useState("category");
+  const { user } = useAuth();
 
   async function handleSubmit(data: any, { reset }: FormHelpers) {
     try {
-      const validated = await CreateProductSchema.validate(data);
-      await ProductServices.create({
-        name: validated.name,
-        price: validated.price,
-        active: true,
-        category: {
-          connect: {
-            id: validated.category,
-          },
-        },
-        desc: validated.desc,
-        quantity: validated.quantity,
-      });
+      const validated = await CreateCategorySchema.validate(data);
 
-      showSuccess("Produto criado com sucesso!");
+      await CategoryServices.create(validated);
+
+      showSuccess("Categoria criada com sucesso!");
       reset();
       onClose();
     } catch (err: any) {
@@ -55,14 +43,10 @@ export const CreateProduct = ({ onClose = () => {} }: Props) => {
   }
 
   return (
-    <Tabs className="w-full px-2 " value={currentTab} defaultValue="product">
+    <Tabs className="w-full px-2 " value={currentTab} defaultValue="category">
       <List className="text-sm mb-5 border-b">
-        <Tab value="product" onClick={setCurrentTab}>
-          Produto
-        </Tab>
-
-        <Tab value="promo" disabled onClick={setCurrentTab}>
-          Promoção
+        <Tab value="category" onClick={setCurrentTab}>
+          Categoria
         </Tab>
       </List>
 
@@ -71,26 +55,19 @@ export const CreateProduct = ({ onClose = () => {} }: Props) => {
         className="flex flex-col p-2 w-full space-y-2"
         onSubmit={handleSubmit}
       >
-        <TabContent className="space-y-2 outline-none" tab="product">
+        <TabContent className="space-y-2 outline-none" tab="category">
           <div className="flex space-x-2">
             <Input name="name" label="Nome" />
             <Select
               className="pb-2 w-full"
-              name="category"
-              options={(menu?.categories || []).map((item) => ({
+              name="menuId"
+              options={(user?.menu || []).map((item) => ({
                 name: item.name,
                 value: `${item.id}`,
               }))}
-              label="Categoria"
+              label="Menu"
             />
           </div>
-
-          <div className="flex space-x-2 pb-2">
-            <Input name="price" label="Preço" type={"number"} step={0.01} />
-            <Input name="quantity" type={"number"} step={1} label="Estoque" />
-          </div>
-
-          <Input name="desc" label="Descrição" as={"textarea"} />
 
           <div className="flex w-full justify-end space-x-2 pt-2">
             <Button
