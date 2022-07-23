@@ -10,7 +10,9 @@ import { SignOut } from "~/pages/SignOut";
 export const Routes = () => {
   return (
     <Router>
-      <Route path="/" element={<HomePage />} />
+
+      <Route path="/" element={<h1>Home</h1>} />
+      <Route path="/:id" element={<HomePage />} />
 
       <Route>
         <Route path="/produto/:id" element={<ProductPage />} />

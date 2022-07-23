@@ -44,6 +44,7 @@ CREATE TABLE "address" (
 CREATE TABLE "menu" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "slug" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -69,6 +70,7 @@ CREATE TABLE "product" (
     "name" TEXT NOT NULL,
     "desc" TEXT,
     "price" DECIMAL(65,30) NOT NULL,
+    "quantity" INTEGER NOT NULL DEFAULT 0,
     "tags" TEXT[],
     "active" BOOLEAN NOT NULL DEFAULT false,
     "categoryId" INTEGER,
@@ -83,6 +85,9 @@ CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "info_contact_userId_key" ON "info_contact"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "menu_slug_key" ON "menu"("slug");
 
 -- AddForeignKey
 ALTER TABLE "info_contact" ADD CONSTRAINT "info_contact_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

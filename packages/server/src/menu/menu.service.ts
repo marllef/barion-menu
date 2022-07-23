@@ -41,6 +41,10 @@ export class MenuService {
     return menu;
   }
 
+  async findByTag(tag: string) {
+    
+  }
+
   async update(id: number, data: Prisma.MenuUpdateInput) {
     const updated = this.prisma.menu.update({
       data: data,
