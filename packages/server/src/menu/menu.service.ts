@@ -24,6 +24,26 @@ export class MenuService {
     return menus;
   }
 
+  async findByUser(userId: string) {
+    const menus = await this.prisma.menu.findMany({
+      where: {
+        userId: userId,
+      },
+      include: {
+        categories: {
+          include: {
+            foods: true,
+          },
+        },
+      },
+    });
+
+    if (!menus.length) {
+      throw new Error('Nenhum menu cadastrado para esse usuário.');
+    }
+    return menus;
+  }
+
   async findMenuById(id: number) {
     const menu = await this.prisma.menu.findFirst({
       where: {
@@ -41,8 +61,21 @@ export class MenuService {
     return menu;
   }
 
-  async findByTag(tag: string) {
-    
+  async findBySlug(slug: string) {
+    const menu = await this.prisma.menu.findUnique({
+      where: { slug: slug },
+      include: {
+        categories: {
+          include: {
+            foods: true,
+          },
+        },
+      },
+    });
+
+    if (!menu) throw new Error('Menu não encontrado.');
+
+    return menu;
   }
 
   async update(id: number, data: Prisma.MenuUpdateInput) {
@@ -59,7 +92,7 @@ export class MenuService {
   async remove(id: number) {
     await this.prisma.menu.delete({
       where: {
-        id,
+        id: id,
       },
     });
 

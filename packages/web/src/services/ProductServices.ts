@@ -1,7 +1,13 @@
-import { Prisma } from "@prisma/client";
+import { Prisma, Product } from "@prisma/client";
 import { api } from "~/configs/api";
 
 export const ProductServices = {
+  async find(id: number) {
+    const response = await api.get<Product>(`/api/food/${id}`);
+
+    return response.data;
+  },
+
   async create(data: Prisma.ProductCreateInput) {
     const response = await api.post("/api/food", data);
 
@@ -16,7 +22,7 @@ export const ProductServices = {
 
   async delete(id: number) {
     const response = await api.delete(`/api/food/${id}`);
-    
+
     return response.data;
   },
 };

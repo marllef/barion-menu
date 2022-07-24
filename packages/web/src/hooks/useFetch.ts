@@ -4,12 +4,19 @@ import { api } from "~/configs/api";
 
 export function useFetch<T = unknown>(
   url: string | null,
-  options?: AxiosRequestConfig
+  options?: AxiosRequestConfig,
+  refreshInterval: number = 10000
 ) {
-  const { data, error, isValidating } = useSWR(url, async () => {
-    const response = await api.get<T>(url!, options);
-    return response.data;
-  });
+  const { data, error, isValidating } = useSWR(
+    url,
+    async () => {
+      const response = await api.get<T>(url!, options);
+      return response.data;
+    },
+    {
+      refreshInterval: refreshInterval,
+    }
+  );
 
   return { data, error, isValidating };
 }

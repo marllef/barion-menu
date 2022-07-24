@@ -15,6 +15,14 @@ export const MenuServices = {
     return response.data;
   },
 
+  async findBySlug(slug: string) {
+    const response = await api.get<MenuWithCategories>(
+      `/api/menu/slug/${slug}`
+    );
+
+    return response.data;
+  },
+
   async update(id: number, data: Prisma.MenuUpdateInput) {
     const response = await api.post<MenuWithCategories>(
       `/api/menu/${id}`,
@@ -25,7 +33,7 @@ export const MenuServices = {
   },
 
   async delete(id: number) {
-    const response = await api.delete<MenuWithCategories>(`/api/menu/${id}`);
+    const response = await api.delete(`/api/menu/${id}`);
 
     return response.data;
   },

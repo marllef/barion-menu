@@ -1,6 +1,6 @@
 import { Product } from "@prisma/client";
 import { Form } from "@unform/web";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "~/components/Card";
 import { Input } from "~/components/Inputs/Input";
 import { Select } from "~/components/Inputs/Select";
@@ -8,55 +8,16 @@ import { AdminLayout } from "~/components/Layout/Admin";
 import { ListView } from "~/components/ListView";
 import { AddProductModal as AddProduct } from "~/components/Modals/Product/Create";
 import { Columm } from "~/components/Table/Column";
-import { DataItem } from "~/components/Table/DataItem";
-import { Row } from "~/components/Table/Row";
-import { useAuth } from "~/hooks/useAuth";
-import { useFetch } from "~/hooks/useFetch";
+
 import { useMenu } from "~/hooks/useMenu";
-import { MenuWithCategories } from "~/interfaces/api/APIMenu";
-import { BRL } from "~/utils/currency";
-
-interface ListItemProps {
-  item: Product;
-}
-
-const ListItem = ({ item }: ListItemProps) => {
-  function getStatus(value: number) {
-    if (value >= 5) {
-      return "Disponível";
-    }
-
-    if (value < 5) {
-      return "Estoque Crítico";
-    }
-
-    return "Indisponível";
-  }
-  return (
-    <Row>
-      <DataItem>{item.id}</DataItem>
-      <DataItem>{item.name}</DataItem>
-      <DataItem>{item.desc}</DataItem>
-      <DataItem>{BRL(item.price || 0)}</DataItem>
-      <DataItem
-        className={`${
-          item.quantity >= 5 ? "text-emerald-600" : "text-red-600"
-        }`}
-      >
-        {getStatus(item.quantity)}
-      </DataItem>
-      <DataItem>{new Date(item?.updatedAt).toLocaleString()}</DataItem>
-      <DataItem>Editar | Excluir</DataItem>
-    </Row>
-  );
-};
+import { ListItem } from "./ListItem";
 
 export const AdminProdutos = () => {
   const [source, setSource] = useState<Product[]>();
   const [selectedCategory, setSelectedCategory] = useState("");
   const [search, setSearch] = useState("");
 
-  const { menu } = useMenu();
+  const { menu } = useMenu('3');
 
   useEffect(() => {
     if (menu) {

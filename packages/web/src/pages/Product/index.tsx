@@ -8,19 +8,24 @@ import { Form } from "@unform/web";
 import { Button } from "~/components/Buttons/Button";
 import { useMenu } from "~/hooks/useMenu";
 import { useEffect, useState } from "react";
+import { MenuServices } from "~/services/MenuServices";
+import { ProductServices } from "~/services/ProductServices";
+import { showError } from "~/utils/toastfy/toasts";
 
 export const ProductPage = () => {
-  const { menu } = useMenu();
   const [data, setData] = useState<Product>();
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const products = menu?.categories.flatMap((item) => item.foods);
-    const product = products?.find((item) => item.id === Number(id));
-
-    if (product) setData(product);
-  }, [menu, setData]);
+    if (id) {
+      ProductServices.find(Number(id))
+        .then((product) => {
+          setData(product);
+        })
+        .catch((err) => showError(err.message));
+    }
+  }, [id, setData]);
 
   return (
     <div className="relative w-full h-full">

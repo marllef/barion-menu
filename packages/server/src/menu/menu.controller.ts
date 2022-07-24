@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { MenuService } from './menu.service';
@@ -20,13 +21,21 @@ export class MenuController {
   }
 
   @Get()
-  findAll() {
+  findAll(@Query('userId') userId: string) {
+    if (userId) {
+      return this.menuService.findByUser(userId);
+    }
     return this.menuService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.menuService.findMenuById(+id);
+  }
+
+  @Get('by/slug/:slug')
+  findBySlug(@Param('slug') slug: string) {
+    return this.menuService.findBySlug(slug);
   }
 
   @Patch(':id')

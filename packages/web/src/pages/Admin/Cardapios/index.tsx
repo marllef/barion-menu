@@ -19,13 +19,11 @@ import { MenuWithCategories } from "~/interfaces/api/APIMenu";
 import { BRL } from "~/utils/currency";
 import { ListItem } from "./ListItem";
 
-export const AdminCategorias = () => {
+export const AdminCardapios = () => {
   const [source, setSource] = useState<CategoryWithFood[]>([]);
-  const [selectedMenu, setSelectedMenu] = useState("3");
   const [search, setSearch] = useState("");
-  const { user } = useAuth();
 
-  const { menu } = useMenu(selectedMenu || "3");
+  const { menu } = useMenu("3");
 
   useEffect(() => {
     if (menu) {
@@ -42,18 +40,7 @@ export const AdminCategorias = () => {
         <div className="flex flex-col w-full h-full overflow-hidden">
           <div className="flex w-full justify-between pt-1 px-3 pb-3">
             <div className="flex space-x-2">
-              <Form className="flex w-40 h-9 space-x-2" onSubmit={() => {}}>
-                <Select
-                  name="menus"
-                  options={(user?.menu || []).map((menu) => ({
-                    name: menu.name,
-                    value: `${menu.id}`,
-                  }))}
-                  onChange={(event) =>
-                    setSelectedMenu(event.currentTarget.value)
-                  }
-                  label="Menu"
-                />
+              <Form className="w-40 h-9" onSubmit={() => {}}>
                 <Input
                   name="find"
                   label="Pesquisar"

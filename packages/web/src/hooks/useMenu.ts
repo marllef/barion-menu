@@ -3,12 +3,10 @@ import { MenuWithCategories } from "~/interfaces/api/APIMenu";
 import { useAuth } from "./useAuth";
 import { useFetch } from "./useFetch";
 
-export const useMenu = () => {
+export const useMenu = <T = MenuWithCategories>(id: string = "") => {
   const { user } = useAuth();
 
-  const { data, isValidating } = useFetch<MenuWithCategories>(
-    user?.menu.length ? `/api/menu/${user?.menu[0].id}` : null
-  );
+  const { data, isValidating } = useFetch<T>(`/api/menu/${id}`);
 
   return { menu: data, loading: isValidating };
 };
