@@ -12,7 +12,7 @@ export const ListItem = ({ item }: ListItemProps) => {
     <Row>
       <DataItem>{item.id}</DataItem>
       <DataItem>{item.name}</DataItem>
-      <DataItem>{item.slug}</DataItem>
+      <DataItem>{item.storeId}</DataItem>
       <DataItem>{new Date(item?.createdAt).toLocaleString()}</DataItem>
       <DataItem>{new Date(item?.updatedAt).toLocaleString()}</DataItem>
       <DataItem>Editar | Excluir</DataItem>

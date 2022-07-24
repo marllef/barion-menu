@@ -10,17 +10,21 @@ async function main() {
   const menu = await prisma.menu.create({
     data: {
       name: "Gourmet's Potatos",
-      slug: "gourmet",
-      user: {
-        connectOrCreate: {
-          where: {
-            email: "marllef.alves@gmail.com",
-          },
-          create: {
-            email: "marllef.alves@gmail.com",
-            name: "Marllef Hyorrane Alves de Freitas",
-            password,
-            currentMenu: 1,
+      store: {
+        create: {
+          code: "gourmets",
+          name: "Gourmet's Potatos",
+          users: {
+            connectOrCreate: {
+              where: {
+                email: "marllef.alves@gmail.com",
+              },
+              create: {
+                email: "marllef.alves@gmail.com",
+                name: "Marllef HYorrane Alves de Freitas",
+                password,
+              },
+            },
           },
         },
       },

@@ -24,10 +24,10 @@ export class MenuService {
     return menus;
   }
 
-  async findByUser(userId: string) {
+  async findByUser(storeId: string) {
     const menus = await this.prisma.menu.findMany({
       where: {
-        userId: userId,
+        storeId,
       },
       include: {
         categories: {
@@ -63,7 +63,7 @@ export class MenuService {
 
   async findBySlug(slug: string) {
     const menu = await this.prisma.menu.findUnique({
-      where: { slug: slug },
+      where: { },
       include: {
         categories: {
           include: {

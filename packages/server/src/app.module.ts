@@ -8,6 +8,8 @@ import { ConfigModule } from '@nestjs/config';
 import { MenuModule } from './menu/menu.module';
 import { CategoryModule } from './category/category.module';
 import { FoodModule } from './food/food.module';
+import { StoreController } from './store/store.controller';
+import { StoreModule } from './store/store.module';
 
 @Module({
   imports: [
@@ -19,8 +21,9 @@ import { FoodModule } from './food/food.module';
     MenuModule,
     CategoryModule,
     FoodModule,
+    StoreModule,
   ],
-  controllers: [AppController, UsersController],
+  controllers: [AppController, UsersController, StoreController],
   providers: [AppService],
 })
 export class AppModule {}
