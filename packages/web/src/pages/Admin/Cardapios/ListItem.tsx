@@ -1,9 +1,10 @@
+import { Menu } from "@prisma/client";
 import { DataItem } from "~/components/Table/DataItem";
 import { Row } from "~/components/Table/Row";
 import { CategoryWithFood } from "~/interfaces/api/APICategory";
 
 interface ListItemProps {
-  item: CategoryWithFood;
+  item: Menu;
 }
 
 export const ListItem = ({ item }: ListItemProps) => {
@@ -11,7 +12,7 @@ export const ListItem = ({ item }: ListItemProps) => {
     <Row>
       <DataItem>{item.id}</DataItem>
       <DataItem>{item.name}</DataItem>
-      <DataItem>{item.foods.length}</DataItem>
+      <DataItem>{item.slug}</DataItem>
       <DataItem>{new Date(item?.createdAt).toLocaleString()}</DataItem>
       <DataItem>{new Date(item?.updatedAt).toLocaleString()}</DataItem>
       <DataItem>Editar | Excluir</DataItem>

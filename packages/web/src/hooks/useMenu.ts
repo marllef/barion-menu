@@ -6,7 +6,9 @@ import { useFetch } from "./useFetch";
 export const useMenu = <T = MenuWithCategories>(id: string = "") => {
   const { user } = useAuth();
 
-  const { data, isValidating } = useFetch<T>(`/api/menu/${id}`);
+  const { data, isValidating } = useFetch<T>(
+    id ? `/api/menu/${id}` : `/api/menu/${user?.currentMenu}`
+  );
 
   return { menu: data, loading: isValidating };
 };

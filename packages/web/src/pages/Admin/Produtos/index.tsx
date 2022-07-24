@@ -17,7 +17,7 @@ export const AdminProdutos = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [search, setSearch] = useState("");
 
-  const { menu } = useMenu('3');
+  const { menu } = useMenu();
 
   useEffect(() => {
     if (menu) {

@@ -21,11 +21,11 @@ import { ListItem } from "./ListItem";
 
 export const AdminCategorias = () => {
   const [source, setSource] = useState<CategoryWithFood[]>([]);
-  const [selectedMenu, setSelectedMenu] = useState("3");
+  const [selectedMenu, setSelectedMenu] = useState("");
   const [search, setSearch] = useState("");
   const { user } = useAuth();
 
-  const { menu } = useMenu(selectedMenu || "3");
+  const { menu } = useMenu(selectedMenu);
 
   useEffect(() => {
     if (menu) {
@@ -49,6 +49,7 @@ export const AdminCategorias = () => {
                     name: menu.name,
                     value: `${menu.id}`,
                   }))}
+                  defaultValue={selectedMenu}
                   onChange={(event) =>
                     setSelectedMenu(event.currentTarget.value)
                   }

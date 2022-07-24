@@ -22,10 +22,12 @@ export class MenuController {
 
   @Get()
   findAll(@Query('userId') userId: string) {
-    if (userId) {
-      return this.menuService.findByUser(userId);
-    }
     return this.menuService.findAll();
+  }
+
+  @Get('by/user/:userId')
+  findByUser(@Query('userId') userId: string) {
+    return this.menuService.findByUser(userId);
   }
 
   @Get(':id')
