@@ -15,9 +15,9 @@ export const MenuServices = {
     return response.data;
   },
 
-  async findBySlug(slug: string) {
+  async findByStore(code: string) {
     const response = await api.get<MenuWithCategories>(
-      `/api/menu/slug/${slug}`
+      `/api/menu/slug/${code}`
     );
 
     return response.data;
@@ -25,7 +25,7 @@ export const MenuServices = {
 
   async update(id: number, data: Prisma.MenuUpdateInput) {
     const response = await api.post<MenuWithCategories>(
-      `/api/menu/${id}`,
+      `/api/store/${id}`,
       data
     );
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PrismaService } from '~/services/prisma.service';
+import { PrismaService } from '~/prisma.service';
 import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 
@@ -44,7 +44,7 @@ export class UsersService {
         id,
       },
       include: {
-        menu: true,
+        store: true,
         infoContact: true,
       },
     });

@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './services/app.service';
 import { UsersController } from './users/users.controller';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
@@ -13,17 +11,17 @@ import { StoreModule } from './store/store.module';
 
 @Module({
   imports: [
-    UsersModule,
-    AuthModule,
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
+    UsersModule,
+    AuthModule,
     MenuModule,
     CategoryModule,
     FoodModule,
     StoreModule,
   ],
-  controllers: [AppController, UsersController, StoreController],
-  providers: [AppService],
+  controllers: [UsersController, StoreController],
+  providers: [],
 })
 export class AppModule {}

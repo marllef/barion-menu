@@ -10,7 +10,7 @@ export const HomePage = () => {
 
   useEffect(() => {
     if (id) {
-      MenuServices.findBySlug(id).then((data) => {
+      MenuServices.findByStore(id).then((data) => {
         setMenu(data);
       });
     }
