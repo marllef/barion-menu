@@ -16,16 +16,14 @@ export const MenuServices = {
   },
 
   async findByStore(code: string) {
-    const response = await api.get<MenuWithCategories>(
-      `/api/menu/slug/${code}`
-    );
+    const response = await api.get<MenuWithCategories>(`/api/store/${code}`);
 
     return response.data;
   },
 
   async update(id: number, data: Prisma.MenuUpdateInput) {
     const response = await api.post<MenuWithCategories>(
-      `/api/store/${id}`,
+      `/api/menu/${id}`,
       data
     );
 

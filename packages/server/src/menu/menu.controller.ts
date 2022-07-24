@@ -21,23 +21,13 @@ export class MenuController {
   }
 
   @Get()
-  findAll(@Query('userId') userId: string) {
+  findAll() {
     return this.menuService.findAll();
-  }
-
-  @Get('by/user/:userId')
-  findByUser(@Query('userId') userId: string) {
-    return this.menuService.findByUser(userId);
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.menuService.findMenuById(+id);
-  }
-
-  @Get('by/slug/:slug')
-  findBySlug(@Param('slug') slug: string) {
-    return this.menuService.findBySlug(slug);
+    return this.menuService.find(+id);
   }
 
   @Patch(':id')

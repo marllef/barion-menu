@@ -2,19 +2,21 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Menu } from "~/components/Menu";
 import { MenuWithCategories } from "~/interfaces/api/APIMenu";
-import { MenuServices } from "~/services/MenuServices";
+import { StoreServices } from "~/services/StoreServices";
 
 export const HomePage = () => {
-  const { id } = useParams();
+  const { code } = useParams();
   const [menu, setMenu] = useState<MenuWithCategories>();
 
   useEffect(() => {
-    if (id) {
-      MenuServices.findByStore(id).then((data) => {
-        setMenu(data);
+    if (code) {
+      StoreServices.find(code).then((data) => {
+        if (data) {
+          setMenu(data.menu.find((item) => item.id === data.activeMenu));
+        }
       });
     }
-  }, [id, setMenu]);
+  }, [code, setMenu]);
 
   if (menu?.categories.length) {
     return (

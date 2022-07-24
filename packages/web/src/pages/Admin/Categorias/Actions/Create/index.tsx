@@ -2,7 +2,7 @@ import { Close, Title } from "@radix-ui/react-dialog";
 import { ReactNode, useEffect, useState } from "react";
 import { Button } from "~/components/Buttons/Button";
 import { Card } from "~/components/Card";
-import { Modal } from "../../Modal";
+import { Modal } from "../../../../../components/Modals/Modal";
 import { IoMdClose } from "react-icons/io";
 import styles from "./CreateCategories.module.css";
 import { CreateCategoryForm } from "~/components/Forms/Category/Create";
@@ -12,7 +12,7 @@ interface Props {
   isVisible?: boolean;
 }
 
-export const CreateCategoryModal = ({ children }: Props) => {
+export const AddModal = ({ children }: Props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleOpen() {

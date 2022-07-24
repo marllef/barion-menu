@@ -6,7 +6,7 @@ import { Input } from "~/components/Inputs/Input";
 import { Select } from "~/components/Inputs/Select";
 import { AdminLayout } from "~/components/Layout/Admin";
 import { ListView } from "~/components/ListView";
-import { CreateCategoryModal } from "~/components/Modals/Categories/Create";
+import { CreateCategoryModal } from "~/pages/Admin/Categorias/Categories/Create";
 import { AddProductModal as AddProduct } from "~/components/Modals/Product/Create";
 import { Columm } from "~/components/Table/Column";
 import { DataItem } from "~/components/Table/DataItem";

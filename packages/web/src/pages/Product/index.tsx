@@ -8,7 +8,6 @@ import { Form } from "@unform/web";
 import { Button } from "~/components/Buttons/Button";
 import { useMenu } from "~/hooks/useMenu";
 import { useEffect, useState } from "react";
-import { MenuServices } from "~/services/MenuServices";
 import { ProductServices } from "~/services/ProductServices";
 import { showError } from "~/utils/toastfy/toasts";
 

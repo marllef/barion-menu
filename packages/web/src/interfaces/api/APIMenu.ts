@@ -1,12 +1,11 @@
 import { Prisma } from "@prisma/client";
 
-export interface MenuWithCategories
-  extends Prisma.MenuGetPayload<{
-    include: {
-      categories: {
-        include: {
-          foods: true;
-        };
+export type MenuWithCategories = Prisma.MenuGetPayload<{
+  include: {
+    categories: {
+      include: {
+        foods: true;
       };
     };
-  }> {}
+  };
+}>;

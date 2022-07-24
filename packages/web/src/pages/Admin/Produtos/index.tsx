@@ -6,9 +6,8 @@ import { Input } from "~/components/Inputs/Input";
 import { Select } from "~/components/Inputs/Select";
 import { AdminLayout } from "~/components/Layout/Admin";
 import { ListView } from "~/components/ListView";
-import { AddProductModal as AddProduct } from "~/components/Modals/Product/Create";
+import { AddProductModal as AddProduct } from "./Actions/Create";
 import { Columm } from "~/components/Table/Column";
-
 import { useMenu } from "~/hooks/useMenu";
 import { ListItem } from "./ListItem";
 

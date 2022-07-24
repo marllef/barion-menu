@@ -2,11 +2,10 @@ import { Product } from "@prisma/client";
 import { ActionButton } from "~/components/Buttons/Action";
 import { DataItem } from "~/components/Table/DataItem";
 import { Row } from "~/components/Table/Row";
-import { MenuServices } from "~/services/MenuServices";
 import { ProductServices } from "~/services/ProductServices";
 import { BRL } from "~/utils/currency";
 import { showError, showSuccess } from "~/utils/toastfy/toasts";
-import { DeleteProductModal as Delete } from "./DeleteModal";
+import { DeleteProductModal as Delete } from "./Actions/Delete";
 
 interface ListItemProps {
   item: Product;
