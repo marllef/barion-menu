@@ -1,38 +1,32 @@
-import { Category, Product } from "@prisma/client";
 import { Form } from "@unform/web";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "~/components/Card";
 import { Input } from "~/components/Inputs/Input";
-import { Select } from "~/components/Inputs/Select";
 import { AdminLayout } from "~/components/Layout/Admin";
 import { ListView } from "~/components/ListView";
-import { CreateCategoryModal } from "~/pages/Admin/Categorias/Categories/Create";
-import { AddProductModal as AddProduct } from "~/components/Modals/Product/Create";
 import { Columm } from "~/components/Table/Column";
-import { DataItem } from "~/components/Table/DataItem";
-import { Row } from "~/components/Table/Row";
 import { useAuth } from "~/hooks/useAuth";
-import { useFetch } from "~/hooks/useFetch";
+
 import { useMenu } from "~/hooks/useMenu";
+import { useStore } from "~/hooks/useStore";
 import { CategoryWithFood } from "~/interfaces/api/APICategory";
 import { MenuWithCategories } from "~/interfaces/api/APIMenu";
-import { BRL } from "~/utils/currency";
 import { ListItem } from "./ListItem";
 
 export const AdminCardapios = () => {
-  const [source, setSource] = useState<CategoryWithFood[]>([]);
+  const [source, setSource] = useState<MenuWithCategories[]>([]);
   const [search, setSearch] = useState("");
 
-  const { menu } = useMenu("3");
+  const { store } = useStore();
 
   useEffect(() => {
-    if (menu) {
-      const categories = menu.categories.filter((item) =>
+    if (store) {
+      const src = store.menu.filter((item) =>
         item.name.toUpperCase().includes(search)
       );
-      setSource(categories);
+      setSource(src);
     }
-  }, [menu, search]);
+  }, [search, store, setSource]);
 
   return (
     <AdminLayout>
@@ -51,8 +45,6 @@ export const AdminCardapios = () => {
                 />
               </Form>
             </div>
-
-            <CreateCategoryModal />
           </div>
 
           <ListView
@@ -60,9 +52,9 @@ export const AdminCardapios = () => {
             render={(item, index) => <ListItem item={item} key={index} />}
           >
             <Columm>Id</Columm>
-            <Columm>Categoria</Columm>
-            <Columm>Produtos</Columm>
-            <Columm>Criado em</Columm>
+            <Columm>Nome</Columm>
+            <Columm>Categorias</Columm>
+            <Columm>Ativo</Columm>
             <Columm>Atualizado em</Columm>
             <Columm>Ações</Columm>
           </ListView>

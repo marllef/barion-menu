@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Menu } from "~/components/Menu";
+import { useStore } from "~/hooks/useStore";
 import { MenuWithCategories } from "~/interfaces/api/APIMenu";
 import { StoreServices } from "~/services/StoreServices";
 
@@ -8,10 +9,13 @@ export const HomePage = () => {
   const { code } = useParams();
   const [menu, setMenu] = useState<MenuWithCategories>();
 
+  const { store } = useStore(code);
+
   useEffect(() => {
     if (code) {
       StoreServices.find(code).then((data) => {
         if (data) {
+          console.log(store?.code);
           setMenu(data.menu.find((item) => item.id === data.activeMenu));
         }
       });

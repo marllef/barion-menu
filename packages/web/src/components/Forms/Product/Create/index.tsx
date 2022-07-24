@@ -19,6 +19,7 @@ import { CreateProductSchema } from "~/utils/schemas/Product/CreateProductSchema
 interface Props {
   onClose?: { (): void };
   onOpen?: { (): void };
+  
 }
 
 export const CreateProduct = ({ onClose = () => {} }: Props) => {

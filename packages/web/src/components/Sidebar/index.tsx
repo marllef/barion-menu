@@ -6,6 +6,7 @@ import {
   MdPeople,
   MdLogout,
   MdStyle,
+  MdRestaurantMenu
 } from "react-icons/md";
 
 export const Sidebar = () => {
@@ -16,10 +17,13 @@ export const Sidebar = () => {
       </SideLink>
 
       <SideSection title="Estabelecimento">
+        <SideLink to="/admin/cardapios" icon={MdRestaurantMenu}>
+          Cardápios
+        </SideLink>
         <SideLink to="/admin/categoria" icon={MdStyle}>
           Categorias
         </SideLink>
-        <SideLink to="/admin/menu" icon={MdFastfood}>
+        <SideLink to="/admin/produtos" icon={MdFastfood}>
           Produtos
         </SideLink>
       </SideSection>
