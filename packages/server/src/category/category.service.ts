@@ -59,11 +59,29 @@ export class CategoryService {
   }
 
   async remove(id: number) {
+    const category = await this.prisma.category.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        foods: true,
+      },
+    });
+
     const deleted = await this.prisma.category.delete({
       where: {
         id,
       },
     });
+
+    await this.prisma.product.deleteMany({
+      where: {
+        categoryId: {
+          equals: null,
+        },
+      },
+    });
+
     return deleted;
   }
 }

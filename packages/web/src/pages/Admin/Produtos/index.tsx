@@ -6,7 +6,7 @@ import { Input } from "~/components/Inputs/Input";
 import { Select } from "~/components/Inputs/Select";
 import { AdminLayout } from "~/components/Layout/Admin";
 import { ListView } from "~/components/ListView";
-import { AddProductModal as AddProduct } from "./Actions/Create";
+import { CreateModal as AddProduct } from "./Actions/Create";
 import { Columm } from "~/components/Table/Column";
 import { useMenu } from "~/hooks/useMenu";
 import { ListItem } from "./ListItem";
@@ -41,7 +41,7 @@ export const AdminProdutos = () => {
     <AdminLayout>
       <Card className="p-2 h-full">
         <div className="flex flex-col w-full h-full overflow-hidden">
-          <div className="flex w-full justify-between pt-1 px-3 pb-3">
+          <div className="flex w-full justify-between pt-1 px-2 pb-3">
             <div className="flex space-x-2">
               <Form className="flex w-40 space-x-2 h-9" onSubmit={() => {}}>
                 <Select

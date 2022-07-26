@@ -5,11 +5,8 @@ import { Input } from "~/components/Inputs/Input";
 import { AdminLayout } from "~/components/Layout/Admin";
 import { ListView } from "~/components/ListView";
 import { Columm } from "~/components/Table/Column";
-import { useAuth } from "~/hooks/useAuth";
 
-import { useMenu } from "~/hooks/useMenu";
 import { useStore } from "~/hooks/useStore";
-import { CategoryWithFood } from "~/interfaces/api/APICategory";
 import { MenuWithCategories } from "~/interfaces/api/APIMenu";
 import { ListItem } from "./ListItem";
 
@@ -32,7 +29,7 @@ export const AdminCardapios = () => {
     <AdminLayout>
       <Card className="p-2 h-full">
         <div className="flex flex-col w-full h-full overflow-hidden">
-          <div className="flex w-full justify-between pt-1 px-3 pb-3">
+          <div className="flex w-full justify-between pt-1 px-2 pb-3">
             <div className="flex space-x-2">
               <Form className="w-40 h-9" onSubmit={() => {}}>
                 <Input

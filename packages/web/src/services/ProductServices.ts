@@ -15,7 +15,7 @@ export const ProductServices = {
   },
 
   async update(id: number, data: Prisma.ProductUpdateInput) {
-    const response = await api.post(`/api/food/${id}`, data);
+    const response = await api.patch(`/api/food/${id}`, data);
 
     return response.data;
   },

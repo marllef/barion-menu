@@ -6,6 +6,7 @@ import { ProductServices } from "~/services/ProductServices";
 import { BRL } from "~/utils/currency";
 import { showError, showSuccess } from "~/utils/toastfy/toasts";
 import { DeleteProductModal as Delete } from "./Actions/Delete";
+import { EditModal as Edit } from "./Actions/Edit";
 
 interface ListItemProps {
   item: Product;
@@ -49,7 +50,7 @@ export const ListItem = ({ item }: ListItemProps) => {
       <DataItem>{new Date(item?.updatedAt).toLocaleString()}</DataItem>
       <DataItem>
         <div className="space-x-4">
-          <ActionButton>Editar</ActionButton>
+          <Edit item={item}>Editar</Edit>
           <Delete name={item.name} onConfirm={handleDelete}>
             Excluir
           </Delete>

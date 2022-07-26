@@ -13,6 +13,7 @@ import { useMenu } from "~/hooks/useMenu";
 import { CategoryServices } from "~/services/CategoryServices";
 import { CreateCategorySchema } from "~/utils/schemas/Category/CreateCategorySchema";
 import { useAuth } from "~/hooks/useAuth";
+import { useStore } from "~/hooks/useStore";
 
 interface Props {
   onClose?: { (): void };
@@ -23,6 +24,8 @@ export const CreateCategoryForm = ({ onClose = () => {} }: Props) => {
   const formRef = useRef<FormHandles>(null);
   const [currentTab, setCurrentTab] = useState("category");
   const { user } = useAuth();
+
+  const { store } = useStore();
 
   async function handleSubmit(data: any, { reset }: FormHelpers) {
     try {
@@ -61,7 +64,7 @@ export const CreateCategoryForm = ({ onClose = () => {} }: Props) => {
             <Select
               className="pb-2 w-full"
               name="menuId"
-              options={(user?.menu || []).map((item) => ({
+              options={(store?.menu || []).map((item) => ({
                 name: item.name,
                 value: `${item.id}`,
               }))}
