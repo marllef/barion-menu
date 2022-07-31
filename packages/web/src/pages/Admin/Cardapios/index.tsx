@@ -8,6 +8,7 @@ import { Columm } from "~/components/Table/Column";
 
 import { useStore } from "~/hooks/useStore";
 import { MenuWithCategories } from "~/interfaces/api/APIMenu";
+import { CreateModal } from "./Actions/Create";
 import { ListItem } from "./ListItem";
 
 export const AdminCardapios = () => {
@@ -42,6 +43,7 @@ export const AdminCardapios = () => {
                 />
               </Form>
             </div>
+            <CreateModal>Adicionar</CreateModal>
           </div>
 
           <ListView
