@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '~/prisma/prisma.service';
 
@@ -26,7 +26,7 @@ export class FoodService {
       },
     });
 
-    if (!food) throw new Error('Este produto não existe.');
+    if (!food) throw new NotFoundException('Nenhum produto encontrado');
 
     return food;
   }

@@ -1,4 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '~/prisma/prisma.service';
 
@@ -49,7 +54,9 @@ export class StoreService {
         },
       },
     });
-    
+
+    if (!store) throw new NotFoundException('Nenhuma loja encontrada');
+
     return store;
   }
 

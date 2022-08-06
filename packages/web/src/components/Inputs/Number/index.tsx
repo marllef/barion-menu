@@ -46,7 +46,7 @@ export const NumberInput = ({ name }: Props) => {
   return (
     <div className="flex w-fit h-10 border rounded">
       <span
-        className="flex p-2 text-sky-500 justify-center items-center"
+        className="flex p-2 text-sky-500 hover:text-sky-700 justify-center items-center cursor-pointer"
         onClick={handleMinus}
       >
         <FaMinus />
@@ -63,7 +63,7 @@ export const NumberInput = ({ name }: Props) => {
         className="w-16 outline-none text-center text-slate-800 disabled:bg-white text-lg"
       />
       <span
-        className="flex p-2 text-sky-500 justify-center items-center"
+        className="flex p-2 text-sky-500 hover:text-sky-700 justify-center items-center cursor-pointer"
         onClick={handlePlus}
       >
         <FaPlus />

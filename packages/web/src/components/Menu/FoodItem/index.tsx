@@ -1,6 +1,6 @@
 import { Product } from "@prisma/client";
 import currency from "currency.js";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styles from "./FoodItem.module.css";
 
 interface Props {
@@ -8,8 +8,9 @@ interface Props {
 }
 
 export const FoodItem = ({ data }: Props) => {
+  const { code } = useParams();
   return (
-    <Link to={`/produto/${data.id}`}>
+    <Link to={`/${code}/${data.id}`}>
       <li className={styles.container}>
         <div className={styles.food_img}></div>
         <div className={styles.info_content}>

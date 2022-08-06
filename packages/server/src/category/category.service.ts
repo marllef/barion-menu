@@ -36,7 +36,7 @@ export class CategoryService {
   }
 
   async findById(id: number) {
-    const category = await this.prisma.category.findFirst({
+    const category = await this.prisma.category.findFirstOrThrow({
       where: {
         id,
       },

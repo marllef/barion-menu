@@ -25,7 +25,7 @@ export class MenuService {
   }
 
   async find(id: number) {
-    const menu = await this.prisma.menu.findFirst({
+    const menu = await this.prisma.menu.findFirstOrThrow({
       where: {
         id,
       },

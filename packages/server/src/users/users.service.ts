@@ -8,11 +8,13 @@ export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create({ password, ...rest }: Prisma.UserCreateInput) {
-    await this.prisma.user.findFirst({
+    const userExists = await this.prisma.user.findFirst({
       where: {
         email: rest.email,
       },
     });
+
+    if(userExists) throw new Error('Usuário já cadastrado!')
 
     const salts = 10;
     const hash = await bcrypt.hash(password, salts);
